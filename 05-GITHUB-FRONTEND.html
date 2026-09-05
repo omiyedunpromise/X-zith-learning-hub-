@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>X-ZITH Learning Hub</title>
+<link rel="icon" href="assets/logo.png">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+*{box-sizing:border-box;} html,body{margin:0;padding:0;font-family:'Poppins',sans-serif;background:#f4f6f9;color:#1b2430;}
+button{font-family:'Poppins',sans-serif;cursor:pointer;} a{text-decoration:none;} .hidden{display:none!important;}
+
+.xz-card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 4px 18px rgba(0,0,0,.08);border:1px solid #eef1f5;margin-bottom:14px;}
+.xz-metric{background:linear-gradient(135deg,#1f8ef1,#0f5bd1);color:#fff;border-radius:16px;padding:18px;text-align:center;}
+.xz-metric h1{margin:0;font-size:26px;} .xz-metric p{margin:0;opacity:.85;font-size:12px;}
+.xz-footer{text-align:center;color:#8a94a6;font-size:12px;margin:30px 0 14px;}
+.xz-grid{display:grid;gap:14px;} .xz-grid.cols-4{grid-template-columns:repeat(4,1fr);}
+@media(max-width:768px){.xz-grid.cols-4{grid-template-columns:1fr;}}
+.btn{display:inline-block;border:none;border-radius:10px;padding:11px 18px;font-weight:600;font-size:14px;}
+.btn-primary{background:linear-gradient(90deg,#0ba360,#3cba92);color:#fff;}
+.btn-secondary{background:#eef1f5;color:#1b2430;}
+.btn-danger{background:linear-gradient(90deg,#ff512f,#dd2476);color:#fff;}
+.btn-block{width:100%;} .btn:disabled{opacity:.5;cursor:not-allowed;}
+input[type=text],input[type=email],input[type=password],select,textarea{width:100%;padding:11px 13px;border-radius:10px;border:1px solid #dde3ea;font-size:14px;font-family:'Poppins',sans-serif;margin-bottom:10px;background:#fff;}
+label.field-label{font-size:13px;font-weight:600;color:#4a5568;margin-bottom:4px;display:block;}
+.spinner{width:34px;height:34px;border:4px solid #2c5364;border-top:4px solid #8fd3f4;border-radius:50%;animation:spin 1s linear infinite;}
+@keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+
+#view-splash{background:radial-gradient(circle at top,#132a3a,#050b12);min-height:100vh;display:flex;align-items:center;justify-content:center;}
+.splash-box{display:flex;flex-direction:column;align-items:center;text-align:center;}
+.splash-box img{width:140px;height:140px;border-radius:50%;animation:pulse 1.6s infinite;margin:14px 0;box-shadow:0 0 40px rgba(31,142,241,.5);}
+.splash-box h2{color:#8fd3f4;letter-spacing:3px;margin:0;font-size:22px;}
+.splash-box p.tag{color:#9fb8c8;margin-top:8px;} .splash-box p.powered{color:#5f7c8c;font-size:12px;margin-top:26px;}
+
+#view-landing{max-width:1140px;margin:0 auto;padding:24px 18px 10px;}
+.landing-hero{text-align:center;margin-bottom:36px;}
+.landing-hero h1{font-size:clamp(28px,6vw,44px);margin:0 0 10px;color:#1b2430;}
+.landing-hero .highlight{color:#1f8ef1;}
+.landing-hero p{font-size:16px;color:#5b6b7d;margin:0 0 20px;line-height:1.6;}
+.landing-cta{display:flex;gap:14px;justify-content:center;margin-bottom:40px;}
+.landing-cta .btn{min-width:160px;font-size:15px;padding:13px 22px;}
+
+#view-auth{max-width:440px;margin:0 auto;padding:40px 18px;}
+.auth-toggle{display:flex;border:1px solid #dde3ea;border-radius:10px;overflow:hidden;margin-bottom:18px;}
+.auth-toggle button{flex:1;background:#fff;border:none;padding:11px;font-weight:600;}
+.auth-toggle button.active{background:#1f8ef1;color:#fff;}
+.alert{border-radius:10px;padding:12px 14px;margin-bottom:12px;font-size:13px;}
+.alert.success{background:#e8f5f0;color:#0ba360;border-left:4px solid #0ba360;}
+.alert.error{background:#ffe8e8;color:#ff4d4f;border-left:4px solid #ff4d4f;}
+
+#view-app{display:flex;min-height:100vh;}
+.sidebar{width:250px;background:#101a26;color:#fff;padding:22px 16px;display:flex;flex-direction:column;flex-shrink:0;}
+.sidebar img.logo{width:64px;height:64px;border-radius:50%;display:block;margin:0 auto 10px;}
+.sidebar h3{text-align:center;margin:0 0 14px;font-size:16px;}
+.nav-item{display:block;width:100%;text-align:left;background:transparent;border:none;color:#cbd6e2;padding:11px 12px;border-radius:10px;font-size:14px;margin-bottom:4px;}
+.nav-item:hover{background:#1c2a3a;} .nav-item.active{background:#1f8ef1;color:#fff;}
+.sidebar .spacer{flex:1;} .sidebar .xz-footer{color:#7488a0;}
+.main-area{flex:1;padding:22px 30px;overflow-x:hidden;}
+.page{display:none;} .page.active{display:block;}
+</style>
+</head>
+<body>
+
+<!-- SPLASH -->
+<div id="view-splash">
+  <div class="splash-box">
+    <h2>X-ZITH LEARNING HUB</h2>
+    <img src="assets/logo.png" alt="logo" onerror="this.style.display='none'">
+    <p class="tag">Smart Education App</p>
+    <div class="spinner"></div>
+    <p class="powered">Powered by X-ZITH Technology</p>
+  </div>
+</div>
+
+<!-- LANDING -->
+<div id="view-landing" class="hidden">
+  <div class="landing-hero">
+    <h1>Learn with <span class="highlight">X-ZITH</span></h1>
+    <p>AI-powered learning for Nigerian students. Textbooks, quizzes, past questions, and more.</p>
+  </div>
+  <div class="landing-cta">
+    <button class="btn btn-primary" id="btn-get-started">🚀 Get Started Free</button>
+    <button class="btn btn-secondary" id="btn-goto-login">🔐 Login</button>
+  </div>
+  <div class="xz-footer">Built by Promise Omiyedun | Powered by X-ZITH Technology</div>
+</div>
+
+<!-- AUTH -->
+<div id="view-auth" class="hidden">
+  <div style="text-align:center;margin-bottom:10px;"><img src="assets/logo.png" width="80" style="border-radius:50%;" onerror="this.style.display='none'"></div>
+  <h2 style="text-align:center;">X-ZITH Learning Hub</h2>
+  <div class="auth-toggle">
+    <button id="tab-login" class="active">Login</button>
+    <button id="tab-signup">Sign Up</button>
+  </div>
+  <div id="auth-alerts"></div>
+  
+  <div id="login-form">
+    <label class="field-label">Username</label>
+    <input type="text" id="login-username" placeholder="Your username">
+    <label class="field-label">Password</label>
+    <div style="position:relative;">
+      <input type="password" id="login-password" placeholder="••••••">
+      <button type="button" class="pwd-toggle" id="login-pwd-toggle" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;">👁️</button>
+    </div>
+    <button class="btn btn-primary btn-block" id="btn-login">Login</button>
+  </div>
+  
+  <div id="signup-form" class="hidden">
+    <label class="field-label">Create Username</label>
+    <input type="text" id="signup-username" placeholder="Choose a username">
+    <label class="field-label">Create Email (Any Gmail)</label>
+    <input type="email" id="signup-email" placeholder="your@gmail.com (or any email)">
+    <label class="field-label">Create Password</label>
+    <div style="position:relative;">
+      <input type="password" id="signup-password" placeholder="••••••">
+      <button type="button" class="pwd-toggle" id="signup-pwd-toggle" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;">👁️</button>
+    </div>
+    <label class="field-label">Confirm Password</label>
+    <div style="position:relative;">
+      <input type="password" id="signup-password2" placeholder="••••••">
+      <button type="button" class="pwd-toggle" id="signup-pwd2-toggle" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;">👁️</button>
+    </div>
+    <button class="btn btn-primary btn-block" id="btn-signup">Create Account</button>
+  </div>
+  
+  <button class="btn btn-secondary btn-block" id="btn-back-home" style="margin-top:12px;">← Back to Home</button>
+  <div class="xz-footer">Built by Promise Omiyedun | Powered by X-ZITH Technology</div>
+</div>
+
+<!-- MAIN APP -->
+<div id="view-app" class="hidden">
+  <div class="sidebar">
+    <img class="logo" src="assets/logo.png" onerror="this.style.display='none'">
+    <h3 id="sb-username">👤 User</h3>
+    <div class="xz-metric"><h1 id="sb-score">0</h1><p>🏆 Score</p></div>
+    <button class="nav-item active" data-page="dashboard">🏠 Dashboard</button>
+    <button class="nav-item" data-page="textbook">📖 Textbook</button>
+    <button class="nav-item" data-page="fixto">🤖 Fixto AI</button>
+    <button class="nav-item" data-page="pastq">📝 Past Q</button>
+    <button class="nav-item" data-page="profile">⚙️ Profile</button>
+    <div class="spacer"></div>
+    <button class="btn btn-danger btn-block" id="btn-logout">🚪 Log Out</button>
+    <div class="xz-footer">Built by<br><b>Promise Omiyedun</b><br>X-ZITH Technology</div>
+  </div>
+  <div class="main-area">
+    <div class="page active" id="page-dashboard"></div>
+    <div class="page" id="page-textbook"></div>
+    <div class="page" id="page-fixto"></div>
+    <div class="page" id="page-pastq"></div>
+    <div class="page" id="page-profile"></div>
+  </div>
+</div>
+
+<script>
+const API_URL = "https://X-zith123-x-zith-api.hf.space/api";
+const State = {
+  user: null,
+  chat: []
+};
+
+function showView(id) {
+  ["view-splash", "view-landing", "view-auth", "view-app"].forEach(v => {
+    document.getElementById(v).classList.toggle("hidden", v !== id);
+  });
+}
+
+function showAuthAlert(msg, isError = false) {
+  const el = document.getElementById("auth-alerts");
+  el.innerHTML = `<div class="alert ${isError ? "error" : "success"}">${isError ? "❌" : "✅"} ${msg}</div>`;
+}
+
+function setAuthTab(tab) {
+  document.getElementById("tab-login").classList.toggle("active", tab === "login");
+  document.getElementById("tab-signup").classList.toggle("active", tab === "signup");
+  document.getElementById("login-form").classList.toggle("hidden", tab !== "login");
+  document.getElementById("signup-form").classList.toggle("hidden", tab !== "signup");
+  document.getElementById("auth-alerts").innerHTML = "";
+}
+
+async function callAPI(action, data) {
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action, ...data })
+    });
+    return await response.json();
+  } catch (err) {
+    console.error("API error:", err);
+    return { error: err.message };
+  }
+}
+
+function refreshSidebar() {
+  if (!State.user) return;
+  document.getElementById("sb-username").innerText = "👤 " + State.user.username;
+  document.getElementById("sb-score").innerText = State.user.total_score || 0;
+}
+
+function navigateTo(pageName) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById("page-" + pageName).classList.add("active");
+  document.querySelectorAll(".nav-item").forEach(b => b.classList.toggle("active", b.dataset.page === pageName));
+  ({
+    dashboard: renderDashboard,
+    textbook: () => alert("Textbook feature coming soon!"),
+    fixto: () => alert("Fixto AI feature coming soon!"),
+    pastq: () => alert("Past Questions feature coming soon!"),
+    profile: renderProfile
+  })[pageName]?.();
+}
+
+document.querySelectorAll(".nav-item").forEach(btn => btn.addEventListener("click", () => navigateTo(btn.dataset.page)));
+
+// AUTH HANDLERS
+document.getElementById("btn-signup").addEventListener("click", async () => {
+  const u = document.getElementById("signup-username").value.trim();
+  const e = document.getElementById("signup-email").value.trim();
+  const p = document.getElementById("signup-password").value;
+  const p2 = document.getElementById("signup-password2").value;
+  
+  if (!u) return showAuthAlert("Username required", true);
+  if (!e || !e.includes("@")) return showAuthAlert("Valid email required", true);
+  if (p !== p2) return showAuthAlert("Passwords don't match", true);
+  if (p.length < 6) return showAuthAlert("Password 6+ characters", true);
+  
+  const result = await callAPI("signup", { username: u, email: e, password: p });
+  if (result.success) {
+    showAuthAlert("Account created! Please login.");
+    setTimeout(() => setAuthTab("login"), 1500);
+  } else {
+    showAuthAlert(result.error || "Signup failed", true);
+  }
+});
+
+document.getElementById("btn-login").addEventListener("click", async () => {
+  const u = document.getElementById("login-username").value.trim();
+  const p = document.getElementById("login-password").value;
+  
+  if (!u || !p) return showAuthAlert("Username and password required", true);
+  
+  const result = await callAPI("login", { username: u, password: p });
+  if (result.success) {
+    State.user = result.user;
+    showView("view-app");
+    setTimeout(() => { refreshSidebar(); navigateTo("dashboard"); }, 200);
+  } else {
+    showAuthAlert(result.error || "Login failed", true);
+  }
+});
+
+// Password toggles
+[
+  { id: "login-pwd-toggle", input: "login-password" },
+  { id: "signup-pwd-toggle", input: "signup-password" },
+  { id: "signup-pwd2-toggle", input: "signup-password2" }
+].forEach(({ id, input }) => {
+  document.getElementById(id).addEventListener("click", e => {
+    e.preventDefault();
+    const inp = document.getElementById(input);
+    const btn = document.getElementById(id);
+    if (inp.type === "password") {
+      inp.type = "text";
+      btn.innerText = "🙈";
+    } else {
+      inp.type = "password";
+      btn.innerText = "👁️";
+    }
+  });
+});
+
+// Navigation
+document.getElementById("btn-get-started").addEventListener("click", () => {
+  setAuthTab("signup");
+  showView("view-auth");
+});
+
+document.getElementById("btn-goto-login").addEventListener("click", () => {
+  setAuthTab("login");
+  showView("view-auth");
+});
+
+document.getElementById("btn-back-home").addEventListener("click", () => showView("view-landing"));
+
+document.getElementById("btn-logout").addEventListener("click", () => {
+  State.user = null;
+  showView("view-landing");
+});
+
+// Render functions
+async function renderDashboard() {
+  const el = document.getElementById("page-dashboard");
+  const u = State.user;
+  el.innerHTML = `
+    <div style="background:linear-gradient(135deg,#0f2027,#203a43);border-radius:20px;padding:32px;color:#fff;margin-bottom:20px;">
+      <h2 style="margin:0;font-size:24px;">Welcome back, ${u.username}! 👋</h2>
+      <p style="margin:10px 0 0;opacity:.85;">Keep learning and earn more points!</p>
+    </div>
+    <div class="xz-grid cols-4">
+      <div class="xz-metric"><h1>${u.total_score}</h1><p>Total Score</p></div>
+      <div class="xz-metric"><h1>${u.quizzes_taken}</h1><p>Quizzes</p></div>
+      <div class="xz-metric"><h1>${u.exam_questions}</h1><p>Questions</p></div>
+      <div class="xz-metric"><h1>🔥${u.streak}</h1><p>Streak</p></div>
+    </div>
+    <div class="xz-footer">Built by Promise Omiyedun | Powered by X-ZITH Technology</div>
+  `;
+}
+
+async function renderProfile() {
+  const el = document.getElementById("page-profile");
+  const u = State.user;
+  el.innerHTML = `
+    <div class="xz-card" style="border-left:5px solid #1f8ef1;">
+      <h3>${u.username}</h3>
+      <p><strong>Email:</strong> ${u.email}</p>
+      <p><strong>Score:</strong> ${u.total_score}</p>
+      <p><strong>Quizzes:</strong> ${u.quizzes_taken}</p>
+    </div>
+    <button class="btn btn-danger btn-block" id="profile-logout">Log Out</button>
+    <div class="xz-footer">Built by Promise Omiyedun | Powered by X-ZITH Technology</div>
+  `;
+  document.getElementById("profile-logout").addEventListener("click", () => {
+    State.user = null;
+    showView("view-landing");
+  });
+}
+
+showView("view-splash");
+setTimeout(() => showView("view-landing"), 3000);
+</script>
+</body>
+</html>
