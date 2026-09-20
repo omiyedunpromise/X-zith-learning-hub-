@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X-ZITH Learning Hub - AI Education Platform for Nigeria</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg: #f5f7fa;
+            --bg-card: #ffffff;
+            --text: #333;
+            --text-light: #666;
+            --border: #e0e0e0;
+            --primary: #667eea;
+            --primary-dark: #764ba2;
+            --success: #2ecc71;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+        }
+        
+        body.dark-mode {
+            --bg: #1a1a1a;
+            --bg-card: #2d2d2d;
+            --text: #ffffff;
+            --text-light: #b0b0b0;
+            --border: #404040;
+        }
+        
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background-color: var(--bg);
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+        
+        /* ===== LANDING NAVBAR ===== */
+        .landing-navbar {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .landing-navbar-left { display: flex; align-items: center; gap: 20px; }
+        .landing-logo { color: white; font-size: 24px; font-weight: 700; }
+        
+        .landing-navbar-right { display: flex; gap: 15px; }
+        .landing-navbar-right button {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .landing-navbar-right button:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .theme-toggle {
+            background: rgba(255,255,255,0.2) !important;
+            padding: 10px 15px !important;
+        }
+        
+        /* ===== LANDING PAGE ===== */
+        .landing-page {
+            display: block;
+        }
+        
+        .landing-page.hidden {
+            display: none;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 60px 30px;
+            text-align: center;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .hero-section h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero-section p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .hero-btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .hero-btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .hero-btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .hero-btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .hero-btn-secondary:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-3px);
+        }
+        
+        .landing-content {
+            padding: 60px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .info-section {
+            margin: 50px 0;
+        }
+        
+        .info-section h2 {
+            color: var(--primary);
+            font-size: 32px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .info-section p {
+            font-size: 16px;
+            line-height: 1.8;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .feature-box {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(102,126,234,0.2);
+        }
+        
+        .feature-box h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+        
+        .feature-box p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        
+        .benefits-list {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid var(--border);
+            margin: 30px 0;
+        }
+        
+        .benefits-list h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .benefits-list ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .benefits-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .benefits-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .benefits-list li:before {
+            content: "✓";
+            color: var(--success);
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 50px 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 50px 0;
+        }
+        
+        .cta-section h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            font-size: 16px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+        
+        .landing-footer {
+            background: var(--bg-card);
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            margin-top: 50px;
+            color: var(--text-light);
+        }
+        
+        .landing-footer p {
+            margin: 10px 0;
+        }
+        
+        .landing-footer strong {
+            color: var(--text);
+        }
+        
+        /* ===== APP NAVBAR ===== */
+        .app-navbar { 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); 
+            padding: 15px 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar-left { display: flex; align-items: center; gap: 20px; }
+        .navbar-logo { color: white; font-size: 24px; font-weight: 700; }
+        .navbar-user { color: white; font-size: 14px; }
+        
+        .navbar-right { display: flex; gap: 15px; align-items: center; position: relative; }
+        
+        .theme-toggle, .notification-btn { 
+            background: rgba(255,255,255,0.2); 
+            color: white; 
+            border: none; 
+            padding: 10px 15px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .theme-toggle:hover, .notification-btn:hover { 
+            background: rgba(255,255,255,0.3); 
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .notification-dropdown {
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            min-width: 350px;
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+            z-index: 999;
+        }
+        
+        .notification-dropdown.active { display: block; }
+        
+        .notification-header {
+            padding: 15px;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .notification-header button {
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .notification-item {
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .notification-item:hover { background: var(--primary); color: white; }
+        .notification-item:last-child { border-bottom: none; }
+        
+        .navbar-menu { 
+            display: flex; 
+            gap: 5px; 
+            list-style: none; 
+            align-items: center;
+        }
+        
+        .navbar-menu button { 
+            background: rgba(255,255,255,0.2); 
+            color: white; 
+            border: none; 
+            padding: 10px 16px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .navbar-menu button:hover { background: rgba(255,255,255,0.3); }
+        .navbar-menu button.active { background: rgba(255,255,255,0.4); }
+        
+        .logout-btn { background: #e74c3c !important; }
+        .logout-btn:hover { background: #c0392b !important; }
+        
+        .menu-toggle { 
+            background: none; 
+            border: none; 
+            color: white; 
+            font-size: 28px; 
+            cursor: pointer; 
+            display: none;
+            padding: 10px;
+            transition: all 0.3s;
+        }
+        
+        .menu-toggle:hover { transform: scale(1.1); }
+        
+        .mobile-menu {
+            position: fixed;
+            top: 60px;
+            right: 0;
+            background: var(--bg-card);
+            border-left: 1px solid var(--border);
+            width: 100%;
+            max-width: 300px;
+            max-height: calc(100vh - 60px);
+            overflow-y: auto;
+            display: none;
+            flex-direction: column;
+            z-index: 999;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .mobile-menu.active { 
+            display: flex;
+        }
+        
+        .mobile-menu button {
+            padding: 16px 20px;
+            border: none;
+            background: none;
+            border-bottom: 1px solid var(--border);
+            text-align: left;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+            transition: background 0.3s;
+        }
+        
+        .mobile-menu button:hover { 
+            background: var(--primary);
+            color: white;
+        }
+        
+        .mobile-menu button:last-child { border-bottom: none; }
+        
+        /* ===== AUTH PAGE ===== */
+        .auth-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        }
+        
+        .auth-box {
+            background: var(--bg-card);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 450px;
+        }
+        
+        .auth-box h1 { font-size: 32px; margin-bottom: 10px; text-align: center; }
+        .auth-box p { color: var(--text-light); margin-bottom: 30px; text-align: center; }
+        
+        .auth-tabs { display: flex; gap: 10px; margin-bottom: 30px; border-bottom: 2px solid var(--border); }
+        .auth-tabs button { flex: 1; padding: 15px; border: none; background: none; cursor: pointer; font-size: 16px; font-weight: 600; color: var(--text-light); border-bottom: 3px solid transparent; }
+        .auth-tabs button.active { color: var(--primary); border-bottom-color: var(--primary); }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+        .form-group input { 
+            width: 100%; 
+            padding: 14px; 
+            border: 2px solid var(--border); 
+            border-radius: 10px; 
+            font-size: 15px;
+            background: var(--bg-card);
+            color: var(--text);
+            transition: border 0.3s;
+        }
+        .form-group input:focus { outline: none; border-color: var(--primary); }
+        
+        .btn-login { 
+            width: 100%; 
+            padding: 14px; 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); 
+            color: white; 
+            border: none; 
+            border-radius: 10px; 
+            font-size: 16px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            margin-top: 10px; 
+        }
+        .btn-login:hover { transform: translateY(-2px); }
+        
+        .error-msg { color: var(--danger); margin-top: 10px; font-size: 14px; display: none; padding: 12px; background: rgba(231, 76, 60, 0.1); border-radius: 8px; }
+        .error-msg.show { display: block; }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        .back-link a {
+            color: var(--primary);
+            text-decoration: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .hidden { display: none !important; }
+        
+        /* ===== APP PAGES ===== */
+        .app-container { display: flex; flex-direction: column; min-height: 100vh; }
+        .main-content { flex: 1; padding: 30px; max-width: 1400px; margin: 0 auto; width: 100%; }
+        
+        .page { display: none; }
+        .page.active { display: block; animation: fadeIn 0.3s ease-in; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .page h1 { font-size: 36px; margin-bottom: 30px; }
+        .page h2 { font-size: 28px; color: var(--primary); margin-bottom: 20px; margin-top: 30px; }
+        
+        .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .metric-card { 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); 
+            color: white; 
+            padding: 25px; 
+            border-radius: 15px; 
+            text-align: center;
+        }
+        .metric-card .label { font-size: 14px; opacity: 0.9; margin-bottom: 10px; }
+        .metric-card .value { font-size: 40px; font-weight: 700; }
+        
+        .card { 
+            background: var(--bg-card); 
+            padding: 30px; 
+            border-radius: 15px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08); 
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+        }
+        
+        .badge { 
+            display: inline-block; 
+            padding: 12px 20px; 
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); 
+            color: white; 
+            border-radius: 20px; 
+            font-weight: 600; 
+            font-size: 14px;
+            margin: 5px;
+        }
+        
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .navbar-menu { display: none; }
+            .menu-toggle { display: block; }
+            .navbar-logo { font-size: 20px; }
+            .main-content { padding: 20px; }
+            .page h1 { font-size: 28px; }
+            .hero-section h1 { font-size: 36px; }
+            .hero-buttons { flex-direction: column; }
+            .hero-btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== LANDING PAGE ===== -->
+<div id="landingPage" class="landing-page">
+    <!-- LANDING NAVBAR -->
+    <nav class="landing-navbar">
+        <div class="landing-navbar-left">
+            <div class="landing-logo">🎓 X-ZITH</div>
+        </div>
+        <div class="landing-navbar-right">
+            <button class="theme-toggle" onclick="toggleTheme()" title="Dark/Light Mode">
+                <span id="landingThemeIcon">🌙</span>
+            </button>
+            <button onclick="showLoginPage()">Login</button>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <div class="hero-section">
+        <h1>🎓 X-ZITH Learning Hub</h1>
+        <p>AI-Powered Education Platform for Nigerian Students</p>
+        <p style="font-size: 16px; margin-bottom: 40px;">Prepare for WAEC, NECO & JAMB with Intelligent AI Tutoring</p>
+        <div class="hero-buttons">
+            <button class="hero-btn hero-btn-primary" onclick="showSignupPage()">Get Started for Free</button>
+            <button class="hero-btn hero-btn-secondary" onclick="scrollToFeatures()">Learn More</button>
+        </div>
+    </div>
+
+    <!-- CONTENT SECTIONS -->
+    <div class="landing-content">
+        <!-- WHAT IS X-ZITH -->
+        <div class="info-section">
+            <h2>🎯 What is X-ZITH?</h2>
+            <p>
+                X-ZITH is an AI-powered learning platform designed specifically for Nigerian students. 
+                We combine cutting-edge artificial intelligence with educational expertise to help students 
+                prepare for national examinations including WAEC, NECO, and JAMB.
+            </p>
+            <p>
+                Our platform provides personalized study materials, AI-powered tutoring, 
+                practice questions, and real-time feedback to help you achieve academic excellence.
+            </p>
+        </div>
+
+        <!-- KEY FEATURES -->
+        <div class="info-section" id="featuresSection">
+            <h2>✨ Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-box">
+                    <h3>📖 Smart Textbook Generator</h3>
+                    <p>Get AI-generated study notes for any topic in seconds. Perfectly formatted and easy to understand.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>🤖 AI Tutor (Fixto)</h3>
+                    <p>Ask anything, get instant answers. Our AI tutor never gets tired and is always available 24/7.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>📝 Past Exam Questions</h3>
+                    <p>Practice with real questions from WAEC, NECO, and JAMB. Generate up to 60 questions per topic.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>🌐 Web Search</h3>
+                    <p>Find YouTube videos, articles, and tutorials for any topic instantly.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>🏆 Leaderboard</h3>
+                    <p>Compete with other students nationwide. Track your progress and climb the rankings.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>🔊 Voice Support</h3>
+                    <p>Listen to all content. Perfect for revision while commuting or multitasking.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- WHY CHOOSE X-ZITH -->
+        <div class="info-section">
+            <h2>💡 Why Choose X-ZITH?</h2>
+            <div class="benefits-list">
+                <h3>For Nigerian Students</h3>
+                <ul>
+                    <li>Built specifically for Nigerian students and exam boards</li>
+                    <li>Completely FREE - No hidden costs or subscriptions</li>
+                    <li>Works on low-bandwidth connections and basic phones</li>
+                    <li>Focuses on WAEC, NECO, and JAMB syllabuses</li>
+                    <li>Community of thousands of students learning together</li>
+                    <li>Progress tracking and achievement badges</li>
+                    <li>Study anytime, anywhere, on any device</li>
+                    <li>No ads or annoying interruptions</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- HOW IT WORKS -->
+        <div class="info-section">
+            <h2>🚀 How It Works</h2>
+            <div class="benefits-list">
+                <h3>4 Simple Steps</h3>
+                <ul>
+                    <li>Create a free account with your email</li>
+                    <li>Choose your subject and topic</li>
+                    <li>Get AI-generated study materials instantly</li>
+                    <li>Practice with quizzes and track your progress</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CTA SECTION -->
+        <div class="cta-section">
+            <h2>Ready to Ace Your Exams?</h2>
+            <p>Join thousands of Nigerian students using X-ZITH to prepare for national exams</p>
+            <button class="hero-btn hero-btn-primary" onclick="showSignupPage()" style="background: white; color: var(--primary);">Get Started for Free Now</button>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="landing-footer">
+            <p><strong>X-ZITH Learning Hub</strong></p>
+            <p>AI-Powered Education Platform for Nigerian Students</p>
+            <p style="margin-top: 20px; font-size: 14px;">Built by <strong>Promise Omiyedun</strong> | Powered by <strong>X-ZITH Technology</strong></p>
+            <p style="margin-top: 10px; font-size: 12px;">© 2026 X-ZITH Learning Hub. All rights reserved.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ===== AUTH PAGE ===== -->
+<div id="authPage" class="auth-page hidden">
+    <div class="auth-box">
+        <h1>🎓 X-ZITH</h1>
+        <p>Join Nigerian Students Learning Smarter</p>
+        
+        <div class="auth-tabs">
+            <button class="active" onclick="switchAuthTab('login')">Login</button>
+            <button onclick="switchAuthTab('signup')">Sign Up</button>
+        </div>
+
+        <div id="loginTab">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="loginEmail" placeholder="your@email.com">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="loginPass" placeholder="••••••••">
+            </div>
+            <button class="btn-login" onclick="handleLogin()">Login</button>
+            <div class="back-link">
+                <a href="#" onclick="goBackToLanding(); return false;">← Back to Home</a>
+            </div>
+        </div>
+
+        <div id="signupTab" class="hidden">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="signupName" placeholder="Your name">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="signupEmail" placeholder="your@email.com">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="signupPass" placeholder="••••••••">
+            </div>
+            <button class="btn-login" onclick="handleSignup()">Create Account</button>
+            <div class="back-link">
+                <a href="#" onclick="goBackToLanding(); return false;">← Back to Home</a>
+            </div>
+        </div>
+
+        <div id="errorMsg" class="error-msg"></div>
+    </div>
+</div>
+
+<!-- ===== APP PAGE ===== -->
+<div id="appPage" class="hidden">
+    <!-- NAVBAR -->
+    <nav class="app-navbar">
+        <div class="navbar-left">
+            <div class="navbar-logo">🎓 X-ZITH</div>
+            <div class="navbar-user" id="navUser">Student</div>
+        </div>
+        
+        <div class="navbar-right">
+            <button class="theme-toggle" onclick="toggleTheme()" title="Dark/Light Mode">
+                <span id="appThemeIcon">🌙</span>
+            </button>
+            
+            <button class="notification-btn" onclick="toggleNotifications()" title="Notifications" style="position: relative;">
+                🔔
+                <div class="notification-badge" id="notificationBadge" style="display: none;">0</div>
+            </button>
+            
+            <div class="notification-dropdown" id="notificationDropdown">
+                <div class="notification-header">
+                    🔔 Notifications
+                    <button onclick="markAllAsRead()">Mark All as Read</button>
+                </div>
+                <div id="notificationsList">
+                    <div class="notification-item">No notifications yet</div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="menu-toggle" onclick="toggleMobileMenu()" title="Menu">☰</button>
+        
+        <ul class="navbar-menu">
+            <li><button onclick="switchPage('dashboard')" id="nav-dashboard" class="active">Dashboard</button></li>
+            <li><button onclick="switchPage('textbook')" id="nav-textbook">Textbook</button></li>
+            <li><button onclick="switchPage('chat')" id="nav-chat">AI Chat</button></li>
+            <li><button onclick="switchPage('pastquestions')" id="nav-pastquestions">Past Exams</button></li>
+            <li><button onclick="switchPage('search')" id="nav-search">Search</button></li>
+            <li><button onclick="switchPage('leaderboard')" id="nav-leaderboard">Leaderboard</button></li>
+            <li><button onclick="switchPage('profile')" id="nav-profile">Profile</button></li>
+            <li><button class="logout-btn" onclick="logout()">Logout</button></li>
+        </ul>
+        
+        <div class="mobile-menu" id="mobileMenu">
+            <button onclick="switchPage('dashboard'); toggleMobileMenu()">Dashboard</button>
+            <button onclick="switchPage('textbook'); toggleMobileMenu()">Textbook</button>
+            <button onclick="switchPage('chat'); toggleMobileMenu()">AI Chat</button>
+            <button onclick="switchPage('pastquestions'); toggleMobileMenu()">Past Exams</button>
+            <button onclick="switchPage('search'); toggleMobileMenu()">Search</button>
+            <button onclick="switchPage('leaderboard'); toggleMobileMenu()">Leaderboard</button>
+            <button onclick="switchPage('profile'); toggleMobileMenu()">Profile</button>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="app-container">
+        <div class="main-content">
+
+            <!-- DASHBOARD PAGE -->
+            <div id="dashboard" class="page active">
+                <h1>Welcome, <span id="dashName">Student</span>! 👋</h1>
+                <h2>📊 Your Progress</h2>
+                <div class="metrics">
+                    <div class="metric-card">
+                        <div class="label">Total Score</div>
+                        <div class="value" id="dashScore">0</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Quizzes Taken</div>
+                        <div class="value" id="dashQuizzes">0</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Learning Streak</div>
+                        <div class="value" id="dashStreak">0</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h2>🏆 Your Badges</h2>
+                    <div id="badgesList">
+                        <span class="badge">🌟 Starter</span>
+                        <span class="badge">📚 Reader</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TEXTBOOK PAGE -->
+            <div id="textbook" class="page hidden">
+                <h1>📖 Textbook Generator</h1>
+                <div class="card">
+                    <h2>Step 1: Choose Your Level</h2>
+                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                        <button class="subject-btn" onclick="selectLevel('JSS')" id="btn-jss" style="padding: 12px 20px; border: 2px solid var(--border); border-radius: 8px; background: var(--bg-card); cursor: pointer; font-weight: 600;">🏫 JSS</button>
+                        <button class="subject-btn" onclick="selectLevel('SSS')" id="btn-sss" style="padding: 12px 20px; border: 2px solid var(--border); border-radius: 8px; background: var(--bg-card); cursor: pointer; font-weight: 600;">🎓 SSS</button>
+                    </div>
+                </div>
+                
+                <div class="card" id="subjectsCard" style="display: none;">
+                    <h2>Step 2: Choose Subject</h2>
+                    <div id="subjectsList" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px;"></div>
+                </div>
+                
+                <div class="card" id="topicCard" style="display: none;">
+                    <h2>Step 3: Enter Your Topic</h2>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <input type="text" id="topicInput" placeholder="e.g., Quadratic Equations..." style="flex: 1; min-width: 200px; padding: 12px; border: 2px solid var(--border); border-radius: 10px; background: var(--bg-card); color: var(--text);">
+                        <button onclick="generateTextbook()" style="padding: 12px 24px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: 600;">Generate 📚</button>
+                    </div>
+                </div>
+
+                <div id="textbookResult" class="card hidden">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap;">
+                        <h2 id="textbookTitle"></h2>
+                        <button onclick="speakText('textbookOutput')" style="padding: 10px 20px; background: var(--success); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">🔊 Read Aloud</button>
+                    </div>
+                    <div id="textbookOutput" style="background: var(--bg); padding: 25px; border-radius: 12px; border-left: 5px solid var(--primary); line-height: 1.8; max-height: 600px; overflow-y: auto;"></div>
+                </div>
+            </div>
+
+            <!-- CHAT PAGE -->
+            <div id="chat" class="page hidden">
+                <h1>🤖 AI Tutor - Ask Anything</h1>
+                <div class="card">
+                    <div id="chatBox" style="height: 500px; overflow-y: auto; border: 2px solid var(--border); padding: 20px; border-radius: 12px; background: var(--bg); margin-bottom: 15px; display: flex; flex-direction: column; gap: 15px;"></div>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" id="chatInput" placeholder="Ask me anything..." onkeypress="if(event.key==='Enter') sendChat()" style="flex: 1; padding: 12px; border: 2px solid var(--border); border-radius: 10px; background: var(--bg-card); color: var(--text);">
+                        <button onclick="sendChat()" style="padding: 12px 24px; background: var(--primary); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: 600;">Send</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAST QUESTIONS PAGE -->
+            <div id="pastquestions" class="page hidden">
+                <h1>📝 Practice Past Exam Questions</h1>
+                <div class="card">
+                    <h2>Select Exam Details</h2>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <select id="pqYear" style="flex: 1; min-width: 150px; padding: 12px; border: 2px solid var(--border); border-radius: 10px; background: var(--bg-card); color: var(--text);">
+                            <option value="">Select Year</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                        </select>
+                        <select id="pqExam" style="flex: 1; min-width: 150px; padding: 12px; border: 2px solid var(--border); border-radius: 10px; background: var(--bg-card); color: var(--text);">
+                            <option value="">Select Exam</option>
+                            <option value="WAEC">WAEC</option>
+                            <option value="JAMB">JAMB</option>
+                            <option value="NECO">NECO</option>
+                        </select>
+                        <select id="pqSubject" style="flex: 1; min-width: 150px; padding: 12px; border: 2px solid var(--border); border-radius: 10px; background: var(--bg-card); color: var(--text);">
+                            <option value="">Select Subject</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="English">English Language</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="Biology">Biology</option>
+                        </select>
+                        <button onclick="generatePastQuestions()" style="padding: 12px 24px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: 600;">Generate</button>
+                    </div>
+                </div>
+                <div id="questionsResult" class="card hidden">
+                    <h2>Questions</h2>
+                    <div id="questionsContainer"></div>
+                </div>
+            </div>
+
+            <!-- SEARCH PAGE -->
+            <div id="search" class="page hidden">
+                <h1>🌐 Web Search & Resources</h1>
+                <div class="card">
+                    <h2>Search for Videos & Articles</h2>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" id="searchQuery" placeholder="Search YouTube, articles..." style="flex: 1; padding: 12px; border: 2px solid var(--border); border-radius: 10px; background: var(--bg-card); color: var(--text);">
+                        <button onclick="performWebSearch()" style="padding: 12px 24px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: 600;">Search 🔍</button>
+                    </div>
+                </div>
+                <div id="searchResult" class="card hidden">
+                    <h2>Search Results</h2>
+                    <div id="searchResultsList"></div>
+                </div>
+            </div>
+
+            <!-- LEADERBOARD PAGE -->
+            <div id="leaderboard" class="page hidden">
+                <h1>🏆 Top Learners</h1>
+                <div class="card">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background: var(--primary); color: white;">
+                                <th style="padding: 15px; text-align: left; font-weight: 600;">Rank</th>
+                                <th style="padding: 15px; text-align: left; font-weight: 600;">Name</th>
+                                <th style="padding: 15px; text-align: left; font-weight: 600;">Score</th>
+                                <th style="padding: 15px; text-align: left; font-weight: 600;">Streak</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboardBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- PROFILE PAGE -->
+            <div id="profile" class="page hidden">
+                <h1>⚙️ My Profile</h1>
+                <div class="card">
+                    <h2>Account Information</h2>
+                    <div style="margin-bottom: 20px;">
+                        <label style="font-weight: 600; display: block; margin-bottom: 8px;">Username</label>
+                        <input type="text" id="profileUsername" style="max-width: 300px; padding: 12px; border: 2px solid var(--border); border-radius: 10px; background: var(--bg-card); color: var(--text);">
+                        <button onclick="saveProfile()" style="margin-top: 10px; padding: 12px 24px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: 600;">Save</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <h2>🏆 Your Badges</h2>
+                    <div id="profileBadges">
+                        <span class="badge">🌟 Starter</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    const API_URL = "https://x-zith-backend.onrender.com";
+    let currentUser = null;
+    let currentSpeech = null;
+    let notifications = [];
+    let darkMode = localStorage.getItem('darkMode') === 'true';
+    
+    const SUBJECTS = {
+        JSS: ['Mathematics', 'English Language', 'Science', 'Social Studies', 'Civic Education', 'Religious Studies'],
+        SSS: ['Mathematics', 'English Language', 'Physics', 'Chemistry', 'Biology', 'Further Maths', 'Economics', 'Government']
+    };
+
+    // ===== DARK MODE =====
+    function toggleTheme() {
+        darkMode = !darkMode;
+        localStorage.setItem('darkMode', darkMode);
+        document.body.classList.toggle('dark-mode', darkMode);
+        document.getElementById('landingThemeIcon').textContent = darkMode ? '☀️' : '🌙';
+        document.getElementById('appThemeIcon').textContent = darkMode ? '☀️' : '🌙';
+    }
+
+    if (darkMode) {
+        document.body.classList.add('dark-mode');
+        document.getElementById('landingThemeIcon').textContent = '☀️';
+    }
+
+    // ===== PAGE NAVIGATION =====
+    function showLoginPage() {
+        document.getElementById('landingPage').classList.add('hidden');
+        document.getElementById('authPage').classList.remove('hidden');
+    }
+
+    function showSignupPage() {
+        document.getElementById('landingPage').classList.add('hidden');
+        document.getElementById('authPage').classList.remove('hidden');
+        switchAuthTab('signup');
+    }
+
+    function goBackToLanding() {
+        document.getElementById('authPage').classList.add('hidden');
+        document.getElementById('landingPage').classList.remove('hidden');
+        switchAuthTab('login');
+    }
+
+    function scrollToFeatures() {
+        document.getElementById('featuresSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // ===== AUTH =====
+    function switchAuthTab(tab) {
+        document.getElementById('loginTab').classList.toggle('hidden', tab !== 'login');
+        document.getElementById('signupTab').classList.toggle('hidden', tab !== 'signup');
+        document.querySelectorAll('.auth-tabs button').forEach(b => b.classList.remove('active'));
+        event.target.classList.add('active');
+    }
+
+    async function apiCall(endpoint, data, method = 'POST') {
+        try {
+            const options = { method, headers: { 'Content-Type': 'application/json' } };
+            if (data) options.body = JSON.stringify(data);
+            const res = await fetch(API_URL + endpoint, options);
+            return await res.json();
+        } catch (err) {
+            return { error: err.message };
+        }
+    }
+
+    async function handleLogin() {
+        const email = document.getElementById('loginEmail').value;
+        const pass = document.getElementById('loginPass').value;
+        if (!email || !pass) {
+            showError('Fill all fields');
+            return;
+        }
+        const res = await apiCall('/api/login', { email, password: pass });
+        if (res.user) {
+            currentUser = res.user;
+            enterApp();
+            addNotification('Welcome!', `Welcome back, ${res.user.username}!`);
+        } else {
+            showError(res.error || 'Login failed');
+        }
+    }
+
+    async function handleSignup() {
+        const name = document.getElementById('signupName').value;
+        const email = document.getElementById('signupEmail').value;
+        const pass = document.getElementById('signupPass').value;
+        if (!name || !email || !pass) {
+            showError('Fill all fields');
+            return;
+        }
+        const res = await apiCall('/api/signup', { username: name, email, password: pass });
+        if (res.success) {
+            showError('Account created! Now login.', 'success');
+            setTimeout(() => switchAuthTab('login'), 2000);
+        } else {
+            showError(res.error || 'Signup failed');
+        }
+    }
+
+    function showError(msg) {
+        const errorEl = document.getElementById('errorMsg');
+        errorEl.textContent = msg;
+        errorEl.classList.add('show');
+    }
+
+    function enterApp() {
+        document.getElementById('authPage').classList.add('hidden');
+        document.getElementById('appPage').classList.remove('hidden');
+        document.getElementById('appThemeIcon').textContent = darkMode ? '☀️' : '🌙';
+        document.getElementById('navUser').textContent = currentUser.username;
+        document.getElementById('dashName').textContent = currentUser.username;
+        document.getElementById('profileUsername').value = currentUser.username;
+        updateDashboard();
+    }
+
+    function updateDashboard() {
+        const score = currentUser.total_score || 0;
+        const quizzes = currentUser.quizzes_taken || 0;
+        const streak = currentUser.streak || 0;
+        
+        document.getElementById('dashScore').textContent = score;
+        document.getElementById('dashQuizzes').textContent = quizzes;
+        document.getElementById('dashStreak').textContent = streak;
+    }
+
+    function switchPage(pageId) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+    }
+
+    // ===== NOTIFICATIONS =====
+    function toggleNotifications() {
+        const dropdown = document.getElementById('notificationDropdown');
+        dropdown.classList.toggle('active');
+    }
+
+    function addNotification(title, message) {
+        notifications.push({ title, message, read: false });
+        updateNotificationBadge();
+        updateNotificationsList();
+    }
+
+    function updateNotificationBadge() {
+        const badge = document.getElementById('notificationBadge');
+        const unread = notifications.filter(n => !n.read).length;
+        if (unread > 0) {
+            badge.style.display = 'flex';
+            badge.textContent = unread;
+        } else {
+            badge.style.display = 'none';
+        }
+    }
+
+    function updateNotificationsList() {
+        const list = document.getElementById('notificationsList');
+        list.innerHTML = '';
+        if (notifications.length === 0) {
+            list.innerHTML = '<div class="notification-item">No notifications yet</div>';
+        } else {
+            notifications.forEach((notif) => {
+                const div = document.createElement('div');
+                div.className = 'notification-item';
+                div.onclick = () => { notif.read = true; updateNotificationBadge(); };
+                div.innerHTML = `<strong>${notif.title}</strong><br><small>${notif.message}</small>`;
+                list.appendChild(div);
+            });
+        }
+    }
+
+    function markAllAsRead() {
+        notifications.forEach(n => n.read = true);
+        updateNotificationBadge();
+        updateNotificationsList();
+        addNotification('✓ Done', 'All notifications marked as read');
+    }
+
+    // ===== TEXTBOOK =====
+    function selectLevel(level) {
+        document.getElementById('btn-jss').classList.remove('active');
+        document.getElementById('btn-sss').classList.remove('active');
+        event.target.classList.add('active');
+        
+        const subjectsList = document.getElementById('subjectsList');
+        subjectsList.innerHTML = '';
+        SUBJECTS[level].forEach(subject => {
+            const btn = document.createElement('button');
+            btn.textContent = subject;
+            btn.onclick = () => selectSubject(subject);
+            btn.style.cssText = 'padding: 12px; border: 2px solid var(--border); border-radius: 8px; background: var(--bg-card); color: var(--text); cursor: pointer; font-weight: 600; transition: all 0.3s;';
+            subjectsList.appendChild(btn);
+        });
+        
+        document.getElementById('subjectsCard').style.display = 'block';
+    }
+
+    function selectSubject(subject) {
+        event.target.style.background = 'var(--primary)';
+        event.target.style.color = 'white';
+        event.target.style.borderColor = 'var(--primary)';
+        document.getElementById('topicCard').style.display = 'block';
+        addNotification('Subject Selected', `You selected ${subject}`);
+    }
+
+    async function generateTextbook() {
+        const topic = document.getElementById('topicInput').value;
+        if (!topic) {
+            alert('Enter a topic');
+            return;
+        }
+        
+        const res = await apiCall('/api/generate-textbook', { level: 'SSS', subject: 'Mathematics', topic });
+        const content = res.note || 'Could not generate textbook';
+        
+        document.getElementById('textbookTitle').textContent = topic;
+        document.getElementById('textbookOutput').innerHTML = content.replace(/\n/g, '<br>');
+        document.getElementById('textbookResult').classList.remove('hidden');
+        addNotification('Textbook Generated', `Your textbook on "${topic}" is ready!`);
+    }
+
+    function speakText(elementId) {
+        const element = document.getElementById(elementId);
+        if (!element) return;
+        
+        if (currentSpeech) window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(element.innerText);
+        utterance.rate = 0.9;
+        window.speechSynthesis.speak(utterance);
+    }
+
+    // ===== CHAT =====
+    async function sendChat() {
+        const input = document.getElementById('chatInput');
+        const box = document.getElementById('chatBox');
+        const msg = input.value;
+        if (!msg) return;
+        
+        const userDiv = document.createElement('div');
+        userDiv.innerHTML = `<div style="background: var(--primary); color: white; padding: 12px 16px; border-radius: 12px; max-width: 80%; margin-left: auto;">${msg}</div>`;
+        box.appendChild(userDiv);
+        input.value = '';
+        box.scrollTop = box.scrollHeight;
+        
+        const res = await apiCall('/api/chat', { message: msg });
+        const aiResponse = res.response || 'No response';
+        
+        const aiDiv = document.createElement('div');
+        aiDiv.innerHTML = `<div style="background: var(--border); color: var(--text); padding: 12px 16px; border-radius: 12px; max-width: 80%;">${aiResponse}</div>`;
+        box.appendChild(aiDiv);
+        box.scrollTop = box.scrollHeight;
+    }
+
+    // ===== PAST QUESTIONS =====
+    async function generatePastQuestions() {
+        const year = document.getElementById('pqYear').value;
+        const exam = document.getElementById('pqExam').value;
+        const subject = document.getElementById('pqSubject').value;
+        
+        if (!year || !exam || !subject) {
+            alert('Select all fields');
+            return;
+        }
+        
+        const res = await apiCall('/api/generate-past-questions', { exam, year, subject, qtype: 'Objective' });
+        
+        document.getElementById('questionsContainer').innerHTML = res.raw || res.response || 'No questions';
+        document.getElementById('questionsResult').classList.remove('hidden');
+        addNotification('Questions Generated', `10 questions loaded for ${exam} ${year}`);
+    }
+
+    // ===== WEB SEARCH =====
+    async function performWebSearch() {
+        const query = document.getElementById('searchQuery').value;
+        if (!query) {
+            alert('Enter search query');
+            return;
+        }
+        
+        const res = await apiCall('/api/search', { q: query });
+        document.getElementById('searchResultsList').innerHTML = res.results || 'No results found';
+        document.getElementById('searchResult').classList.remove('hidden');
+        addNotification('Search Complete', `Found results for "${query}"`);
+    }
+
+    // ===== LEADERBOARD =====
+    async function loadLeaderboard() {
+        const res = await apiCall('/api/leaderboard', {});
+        const tbody = document.getElementById('leaderboardBody');
+        tbody.innerHTML = '';
+        
+        if (res.leaderboard && Array.isArray(res.leaderboard)) {
+            const medals = ['🥇', '🥈', '🥉'];
+            res.leaderboard.slice(0, 10).forEach((user, i) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td style="padding: 15px; border-bottom: 1px solid var(--border);"><span style="font-size: 20px; font-weight: 700;">${medals[i] || i + 1}</span></td>
+                    <td style="padding: 15px; border-bottom: 1px solid var(--border);">${user.username}</td>
+                    <td style="padding: 15px; border-bottom: 1px solid var(--border);">${user.total_score || 0} pts</td>
+                    <td style="padding: 15px; border-bottom: 1px solid var(--border);">${user.streak || 0}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+    }
+
+    // ===== PROFILE =====
+    function saveProfile() {
+        addNotification('Profile Updated', 'Your profile has been saved');
+    }
+
+    // ===== MOBILE MENU =====
+    function toggleMobileMenu() {
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenu.classList.toggle('active');
+    }
+
+    document.addEventListener('click', function(event) {
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuToggle = document.querySelector('.menu-toggle');
+        if (mobileMenu && !mobileMenu.contains(event.target) && menuToggle && !menuToggle.contains(event.target)) {
+            mobileMenu.classList.remove('active');
+        }
+    });
+
+    // ===== LOGOUT =====
+    function logout() {
+        currentUser = null;
+        notifications = [];
+        document.getElementById('appPage').classList.add('hidden');
+        document.getElementById('landingPage').classList.remove('hidden');
+    }
+</script>
+</body>
+</html>
