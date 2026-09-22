@@ -1,0 +1,2539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X-ZITH Learning Hub - AI Education Platform for Nigeria</title>
+    <script>try { if (localStorage.getItem("xzith_user")) document.documentElement.classList.add("has-session"); } catch (e) {}</script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg: #f5f7fa;
+            --bg-card: #ffffff;
+            --text: #333;
+            --text-light: #666;
+            --border: #e0e0e0;
+            --primary: #667eea;
+            --primary-dark: #764ba2;
+            --success: #2ecc71;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+        }
+        
+        body.dark-mode {
+            --bg: #1a1a1a;
+            --bg-card: #2d2d2d;
+            --text: #ffffff;
+            --text-light: #b0b0b0;
+            --border: #404040;
+        }
+        
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background-color: var(--bg);
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+        
+        /* ===== LANDING NAVBAR ===== */
+        .landing-navbar {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .landing-navbar-left { display: flex; align-items: center; gap: 20px; }
+        .landing-logo { color: white; font-size: 24px; font-weight: 700; }
+        
+        .landing-navbar-right { display: flex; gap: 15px; }
+        .landing-navbar-right button {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .landing-navbar-right button:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .theme-toggle {
+            background: rgba(255,255,255,0.2) !important;
+            padding: 10px 15px !important;
+        }
+        
+        /* ===== LANDING PAGE ===== */
+        .landing-page {
+            display: block;
+        }
+        
+        .landing-page.hidden {
+            display: none;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 60px 30px;
+            text-align: center;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .hero-section h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero-section p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .hero-btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .hero-btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .hero-btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .hero-btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .hero-btn-secondary:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-3px);
+        }
+        
+        .landing-content {
+            padding: 60px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .info-section {
+            margin: 50px 0;
+        }
+        
+        .info-section h2 {
+            color: var(--primary);
+            font-size: 32px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .info-section p {
+            font-size: 16px;
+            line-height: 1.8;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .feature-box {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(102,126,234,0.2);
+        }
+        
+        .feature-box h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+        
+        .feature-box p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        
+        .benefits-list {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid var(--border);
+            margin: 30px 0;
+        }
+        
+        .benefits-list h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .benefits-list ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .benefits-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .benefits-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .benefits-list li:before {
+            content: "✓";
+            color: var(--success);
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 50px 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 50px 0;
+        }
+        
+        .cta-section h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            font-size: 16px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+        
+        .landing-footer {
+            background: var(--bg-card);
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            margin-top: 50px;
+            color: var(--text-light);
+        }
+        
+        .landing-footer p {
+            margin: 10px 0;
+        }
+        
+        .landing-footer strong {
+            color: var(--text);
+        }
+        
+        /* ===== APP NAVBAR ===== */
+        .app-navbar { 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); 
+            padding: 15px 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar-left { display: flex; align-items: center; gap: 20px; }
+        .navbar-logo { color: white; font-size: 24px; font-weight: 700; }
+        .navbar-user { color: white; font-size: 14px; }
+        
+        .navbar-right { display: flex; gap: 15px; align-items: center; position: relative; }
+        
+        .theme-toggle, .notification-btn { 
+            background: rgba(255,255,255,0.2); 
+            color: white; 
+            border: none; 
+            padding: 10px 15px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .theme-toggle:hover, .notification-btn:hover { 
+            background: rgba(255,255,255,0.3); 
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .notification-dropdown {
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            min-width: 350px;
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+            z-index: 999;
+        }
+        
+        .notification-dropdown.active { display: block; }
+        
+        .notification-header {
+            padding: 15px;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .notification-header button {
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .notification-item {
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .notification-item:hover { background: var(--primary); color: white; }
+        .notification-item:last-child { border-bottom: none; }
+        
+        .navbar-menu { 
+            display: flex; 
+            gap: 5px; 
+            list-style: none; 
+            align-items: center;
+        }
+        
+        .navbar-menu button { 
+            background: rgba(255,255,255,0.2); 
+            color: white; 
+            border: none; 
+            padding: 10px 16px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .navbar-menu button:hover { background: rgba(255,255,255,0.3); }
+        .navbar-menu button.active { background: rgba(255,255,255,0.4); }
+        
+        .logout-btn { background: #e74c3c !important; }
+        .logout-btn:hover { background: #c0392b !important; }
+        
+        .menu-toggle { 
+            background: none; 
+            border: none; 
+            color: white; 
+            font-size: 28px; 
+            cursor: pointer; 
+            display: none;
+            padding: 10px;
+            transition: all 0.3s;
+        }
+        
+        .menu-toggle:hover { transform: scale(1.1); }
+        
+        .mobile-menu {
+            position: fixed;
+            top: 60px;
+            right: 0;
+            background: var(--bg-card);
+            border-left: 1px solid var(--border);
+            width: 100%;
+            max-width: 300px;
+            max-height: calc(100vh - 60px);
+            overflow-y: auto;
+            display: none;
+            flex-direction: column;
+            z-index: 999;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .mobile-menu.active { 
+            display: flex;
+        }
+        
+        .mobile-menu button {
+            padding: 16px 20px;
+            border: none;
+            background: none;
+            border-bottom: 1px solid var(--border);
+            text-align: left;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+            transition: background 0.3s;
+        }
+        
+        .mobile-menu button:hover { 
+            background: var(--primary);
+            color: white;
+        }
+        
+        .mobile-menu button:last-child { border-bottom: none; }
+        
+        /* ===== AUTH PAGE ===== */
+        .auth-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        }
+        
+        .auth-box {
+            background: var(--bg-card);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 450px;
+        }
+        
+        .auth-box h1 { font-size: 32px; margin-bottom: 10px; text-align: center; }
+        .auth-box p { color: var(--text-light); margin-bottom: 30px; text-align: center; }
+        
+        .auth-tabs { display: flex; gap: 10px; margin-bottom: 30px; border-bottom: 2px solid var(--border); }
+        .auth-tabs button { flex: 1; padding: 15px; border: none; background: none; cursor: pointer; font-size: 16px; font-weight: 600; color: var(--text-light); border-bottom: 3px solid transparent; }
+        .auth-tabs button.active { color: var(--primary); border-bottom-color: var(--primary); }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+        .form-group input { 
+            width: 100%; 
+            padding: 14px; 
+            border: 2px solid var(--border); 
+            border-radius: 10px; 
+            font-size: 15px;
+            background: var(--bg-card);
+            color: var(--text);
+            transition: border 0.3s;
+        }
+        .form-group input:focus { outline: none; border-color: var(--primary); }
+        
+        .btn-login { 
+            width: 100%; 
+            padding: 14px; 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); 
+            color: white; 
+            border: none; 
+            border-radius: 10px; 
+            font-size: 16px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            margin-top: 10px; 
+        }
+        .btn-login:hover { transform: translateY(-2px); }
+        
+        .error-msg { font-size: 14px; display: none !important; }
+        .error-msg.show { display: block !important; }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        .back-link a {
+            color: var(--primary);
+            text-decoration: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .hidden { display: none !important; }
+        
+        /* ===== APP PAGES ===== */
+        .app-container { display: flex; flex-direction: column; min-height: 100vh; }
+        .main-content { flex: 1; padding: 30px; max-width: 1400px; margin: 0 auto; width: 100%; }
+        
+        .page { display: none; }
+        .page.active { display: block; animation: fadeIn 0.3s ease-in; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .page h1 { font-size: 36px; margin-bottom: 30px; }
+        .page h2 { font-size: 28px; color: var(--primary); margin-bottom: 20px; margin-top: 30px; }
+        
+        .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .metric-card { 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); 
+            color: white; 
+            padding: 25px; 
+            border-radius: 15px; 
+            text-align: center;
+        }
+        .metric-card .label { font-size: 14px; opacity: 0.9; margin-bottom: 10px; }
+        .metric-card .value { font-size: 40px; font-weight: 700; }
+        
+        .card { 
+            background: var(--bg-card); 
+            padding: 30px; 
+            border-radius: 15px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08); 
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+        }
+        
+        .badge { 
+            display: inline-block; 
+            padding: 12px 20px; 
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); 
+            color: white; 
+            border-radius: 20px; 
+            font-weight: 600; 
+            font-size: 14px;
+            margin: 5px;
+        }
+
+        /* ===== NEW FEATURE STYLES ===== */
+        
+        /* VOICE BUTTON */
+        .voice-btn {
+            background: var(--success);
+            color: white;
+            border: none;
+            padding: 10px 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            margin-left: 8px;
+        }
+        
+        .voice-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+        }
+        
+        .voice-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* TEXTBOOK JSS/SSS LAYOUT */
+        .textbook-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .textbook-column {
+            padding: 20px;
+            background: var(--bg);
+            border-radius: 12px;
+        }
+
+        .textbook-column h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 18px;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 10px;
+        }
+
+        .jss-sss-subjects {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
+
+        .subject-item {
+            padding: 12px 15px;
+            background: var(--bg-card);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 4px solid var(--border);
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .subject-item:hover {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(240, 147, 251, 0.1));
+            border-left-color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .subject-item.selected {
+            background: linear-gradient(135deg, var(--primary), #764ba2);
+            color: white;
+            border-left-color: white;
+            font-weight: 600;
+        }
+
+        /* QUESTION CORRECTIONS */
+        .correction-box {
+            background: rgba(46, 204, 113, 0.1);
+            border-left: 4px solid var(--success);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 14px;
+            color: var(--text);
+            display: none;
+        }
+
+        .correction-box.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .correction-box strong {
+            color: var(--success);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* PROGRESS TRACKER */
+        .question-progress {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: var(--bg);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border);
+            border-radius: 10px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), #764ba2);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        /* GENERATE MORE BUTTON */
+        .btn-generate-more {
+            width: 100%;
+            margin-top: 20px;
+            padding: 14px 24px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+            display: none;
+        }
+
+        .btn-generate-more:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-generate-more.show {
+            display: block;
+        }
+
+        /* ===== FIXES & ADDITIONS ===== */
+        /* Hides the landing page instantly on reload when a saved login exists (no flash) */
+        html.has-session #landingPage { display: none !important; }
+
+        /* Navbar order: logo | menu | theme + bell | hamburger */
+        .navbar-left { order: 1; }
+        .navbar-menu { order: 2; flex-wrap: wrap; justify-content: center; }
+        .navbar-right { order: 3; }
+        .menu-toggle { order: 4; }
+
+        .mobile-menu { top: 70px; max-height: calc(100vh - 70px); }
+        .mobile-menu button.active { background: var(--primary); color: white; }
+
+        .notification-dropdown { max-width: 92vw; }
+        .notification-item.read { opacity: 0.6; }
+
+        select option { background: var(--bg-card); color: var(--text); }
+
+        .pq-field {
+            flex: 1;
+            min-width: 150px;
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            background: var(--bg-card);
+            color: var(--text);
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .pq-field:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        /* Textbook subject picker */
+        .subject-group-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 16px 0 8px;
+        }
+        .subject-group-title:first-child { margin-top: 0; }
+        .subject-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
+        }
+
+        /* Formatted AI text (textbook, chat, search) */
+        .rich h3 { font-size: 20px; color: var(--primary); margin: 18px 0 8px; }
+        .rich h4 { font-size: 17px; margin: 14px 0 6px; }
+        .rich p { margin: 0 0 12px; }
+        .rich ul, .rich ol { margin: 0 0 12px 22px; }
+        .rich li { margin-bottom: 4px; }
+        .rich code { background: var(--border); padding: 1px 6px; border-radius: 4px; font-size: 0.92em; }
+        .rich hr { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+        .rich > :last-child { margin-bottom: 0; }
+
+        /* Past-question cards */
+        .q-card {
+            margin-top: 16px;
+            padding: 15px;
+            background: var(--bg);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+            overflow-wrap: anywhere;
+        }
+        .q-option { display: inline-block; padding-left: 14px; }
+        .q-answer { color: var(--success); font-weight: 700; }
+        .q-expl { color: var(--text-light); font-size: 14px; }
+
+        /* Toasts */
+        #toastBox {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+            width: calc(100% - 32px);
+            max-width: 440px;
+            pointer-events: none;
+        }
+        .toast {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 10px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+            animation: fadeIn 0.25s ease-in;
+            pointer-events: auto;
+        }
+        .toast.info { background: var(--primary); }
+        .toast.success { background: var(--success); }
+        .toast.error { background: var(--danger); }
+
+        button:disabled { cursor: not-allowed; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1100px) {
+            .navbar-menu { display: none; }
+            .menu-toggle { display: block; }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-logo { font-size: 20px; }
+            .main-content { padding: 20px; }
+            .page h1 { font-size: 28px; }
+            .hero-section h1 { font-size: 36px; }
+            .hero-buttons { flex-direction: column; }
+            .hero-btn { width: 100%; }
+            .auth-box { padding: 30px 22px; margin: 16px; }
+            .landing-navbar, .app-navbar { padding: 15px 16px; }
+        }
+
+        @media (max-width: 480px) {
+            .navbar-user { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="toastBox"></div>
+
+<!-- ===== LANDING PAGE ===== -->
+<div id="landingPage" class="landing-page">
+    <!-- LANDING NAVBAR -->
+    <nav class="landing-navbar">
+        <div class="landing-navbar-left">
+            <div class="landing-logo">🎓 X-ZITH</div>
+        </div>
+        <div class="landing-navbar-right">
+            <button class="theme-toggle" onclick="toggleTheme()" title="Dark/Light Mode">
+                <span id="landingThemeIcon">🌙</span>
+            </button>
+            <button onclick="showLoginPage()">Login</button>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <div class="hero-section">
+        <h1>🎓 X-ZITH Learning Hub</h1>
+        <p>AI-Powered Education Platform for Nigerian Students</p>
+        <p style="font-size: 16px; margin-bottom: 40px;">Prepare for WAEC, NECO & JAMB with Intelligent AI Tutoring</p>
+        <div class="hero-buttons">
+            <button class="hero-btn hero-btn-primary" onclick="showSignupPage()">Get Started for Free</button>
+            <button class="hero-btn hero-btn-secondary" onclick="scrollToFeatures()">Learn More</button>
+        </div>
+    </div>
+
+    <!-- CONTENT SECTIONS -->
+    <div class="landing-content">
+        <!-- WHAT IS X-ZITH -->
+        <div class="info-section">
+            <h2>🎯 What is X-ZITH?</h2>
+            <p>
+                X-ZITH is an AI-powered learning platform designed specifically for Nigerian students. 
+                We combine cutting-edge artificial intelligence with educational expertise to help students 
+                prepare for national examinations including WAEC, NECO, and JAMB.
+            </p>
+            <p>
+                Our platform provides personalized study materials, AI-powered tutoring, 
+                practice questions, and real-time feedback to help you achieve academic excellence.
+            </p>
+        </div>
+
+        <!-- KEY FEATURES -->
+        <div class="info-section" id="featuresSection">
+            <h2>✨ Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-box">
+                    <h3>📖 Smart Textbook Generator</h3>
+                    <p>Get AI-generated study notes for any topic in seconds. Perfectly formatted and easy to understand.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>🤖 AI Tutor (Fixto)</h3>
+                    <p>Ask anything, get instant answers. Our AI tutor never gets tired and is always available 24/7.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>📝 Past Exam Questions</h3>
+                    <p>Practice with exam-style questions modelled on WAEC, NECO, and JAMB papers. Generate up to 60 questions at a time.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>🌐 Web Search</h3>
+                    <p>Find YouTube videos, articles, and tutorials for any topic instantly.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>🏆 Leaderboard</h3>
+                    <p>Compete with other students nationwide. Track your progress and climb the rankings.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>🔊 Voice Support</h3>
+                    <p>Listen to all content. Perfect for revision while commuting or multitasking.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- WHY CHOOSE X-ZITH -->
+        <div class="info-section">
+            <h2>💡 Why Choose X-ZITH?</h2>
+            <div class="benefits-list">
+                <h3>For Nigerian Students</h3>
+                <ul>
+                    <li>Built specifically for Nigerian students and exam boards</li>
+                    <li>Completely FREE - No hidden costs or subscriptions</li>
+                    <li>Works on low-bandwidth connections and basic phones</li>
+                    <li>Focuses on WAEC, NECO, and JAMB syllabuses</li>
+                    <li>Community of thousands of students learning together</li>
+                    <li>Progress tracking and achievement badges</li>
+                    <li>Study anytime, anywhere, on any device</li>
+                    <li>No ads or annoying interruptions</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- HOW IT WORKS -->
+        <div class="info-section">
+            <h2>🚀 How It Works</h2>
+            <div class="benefits-list">
+                <h3>4 Simple Steps</h3>
+                <ul>
+                    <li>Create a free account with your email</li>
+                    <li>Choose your subject and topic</li>
+                    <li>Get AI-generated study materials instantly</li>
+                    <li>Practice with quizzes and track your progress</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CTA SECTION -->
+        <div class="cta-section">
+            <h2>Ready to Ace Your Exams?</h2>
+            <p>Join thousands of Nigerian students using X-ZITH to prepare for national exams</p>
+            <button class="hero-btn hero-btn-primary" onclick="showSignupPage()" style="background: white; color: var(--primary);">Get Started for Free Now</button>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="landing-footer">
+            <p><strong>X-ZITH Learning Hub</strong></p>
+            <p>AI-Powered Education Platform for Nigerian Students</p>
+            <p style="margin-top: 20px; font-size: 14px;">Built by <strong>Promise Omiyedun</strong> | Powered by <strong>X-ZITH Technology</strong></p>
+            <p style="margin-top: 10px; font-size: 12px;">© 2026 X-ZITH Learning Hub. All rights reserved.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ===== AUTH PAGE ===== -->
+<div id="authPage" class="auth-page hidden">
+    <div class="auth-box">
+        <h1>🎓 X-ZITH</h1>
+        <p>Join Nigerian Students Learning Smarter</p>
+        
+        <div class="auth-tabs">
+            <button id="tabLoginBtn" class="active" onclick="switchAuthTab('login')">Login</button>
+            <button id="tabSignupBtn" onclick="switchAuthTab('signup')">Sign Up</button>
+        </div>
+
+        <div id="loginTab">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="loginEmail" placeholder="your@email.com">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="loginPass" placeholder="••••••••">
+            </div>
+            <button id="loginBtn" class="btn-login" onclick="handleLogin(this)">Login</button>
+            <div class="back-link">
+                <a href="#" onclick="goBackToLanding(); return false;">← Back to Home</a>
+            </div>
+        </div>
+
+        <div id="signupTab" class="hidden">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="signupName" placeholder="Your name">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="signupEmail" placeholder="your@email.com">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="signupPass" placeholder="••••••••">
+            </div>
+            <button id="signupBtn" class="btn-login" onclick="handleSignup(this)">Create Account</button>
+            <div class="back-link">
+                <a href="#" onclick="goBackToLanding(); return false;">← Back to Home</a>
+            </div>
+        </div>
+
+        <div id="errorMsg" class="error-msg" style="margin-top: 10px; padding: 12px; background: rgba(231, 76, 60, 0.1); border-radius: 8px; border-left: 4px solid var(--danger); display: none;"></div>
+    </div>
+</div>
+
+<!-- ===== APP PAGE ===== -->
+<div id="appPage" class="hidden">
+    <!-- NAVBAR -->
+    <nav class="app-navbar">
+        <div class="navbar-left">
+            <div class="navbar-logo">🎓 X-ZITH</div>
+            <div class="navbar-user" id="navUser">Student</div>
+        </div>
+        
+        <div class="navbar-right">
+            <button class="theme-toggle" onclick="toggleTheme()" title="Dark/Light Mode">
+                <span id="appThemeIcon">🌙</span>
+            </button>
+            
+            <button class="notification-btn" onclick="toggleNotifications()" title="Notifications" style="position: relative;">
+                🔔
+                <div class="notification-badge" id="notificationBadge" style="display: none;">0</div>
+            </button>
+            
+            <div class="notification-dropdown" id="notificationDropdown">
+                <div class="notification-header">
+                    🔔 Notifications
+                    <button onclick="markAllAsRead()">Mark All as Read</button>
+                </div>
+                <div id="notificationsList">
+                    <div class="notification-item">No notifications yet</div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="menu-toggle" onclick="toggleMobileMenu()" title="Menu">☰</button>
+        
+        <ul class="navbar-menu">
+            <li><button data-page="dashboard" onclick="switchPage('dashboard')" id="nav-dashboard" class="active">Dashboard</button></li>
+            <li><button data-page="textbook" onclick="switchPage('textbook')" id="nav-textbook">Textbook</button></li>
+            <li><button data-page="chat" onclick="switchPage('chat')" id="nav-chat">AI Chat</button></li>
+            <li><button data-page="pastquestions" onclick="switchPage('pastquestions')" id="nav-pastquestions">Past Exams</button></li>
+            <li><button data-page="search" onclick="switchPage('search')" id="nav-search">Search</button></li>
+            <li><button data-page="leaderboard" onclick="switchPage('leaderboard')" id="nav-leaderboard">Leaderboard</button></li>
+            <li><button data-page="profile" onclick="switchPage('profile')" id="nav-profile">Profile</button></li>
+            <li><button class="logout-btn" onclick="logout()">Logout</button></li>
+        </ul>
+        
+        <div class="mobile-menu" id="mobileMenu">
+            <button data-page="dashboard" onclick="switchPage('dashboard'); toggleMobileMenu()">Dashboard</button>
+            <button data-page="textbook" onclick="switchPage('textbook'); toggleMobileMenu()">Textbook</button>
+            <button data-page="chat" onclick="switchPage('chat'); toggleMobileMenu()">AI Chat</button>
+            <button data-page="pastquestions" onclick="switchPage('pastquestions'); toggleMobileMenu()">Past Exams</button>
+            <button data-page="search" onclick="switchPage('search'); toggleMobileMenu()">Search</button>
+            <button data-page="leaderboard" onclick="switchPage('leaderboard'); toggleMobileMenu()">Leaderboard</button>
+            <button data-page="profile" onclick="switchPage('profile'); toggleMobileMenu()">Profile</button>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="app-container">
+        <div class="main-content">
+
+            <!-- DASHBOARD PAGE -->
+            <div id="dashboard" class="page active">
+                <h1>Welcome, <span id="dashName">Student</span>! 👋</h1>
+                <h2>📊 Your Progress</h2>
+                <div class="metrics">
+                    <div class="metric-card">
+                        <div class="label">Total Score</div>
+                        <div class="value" id="dashScore">0</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Quizzes Taken</div>
+                        <div class="value" id="dashQuizzes">0</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Learning Streak</div>
+                        <div class="value" id="dashStreak">0</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h2>🏆 Your Badges</h2>
+                    <div id="badgesList">
+                        <span class="badge">🌟 Starter</span>
+                        <span class="badge">📚 Reader</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TEXTBOOK PAGE -->
+            <div id="textbook" class="page">
+                <h1>📖 Textbook Generator</h1>
+                <p style="color: var(--text-light); margin-bottom: 20px;">Select your level, choose a subject, enter your topic and generate comprehensive study materials in seconds! ✨</p>
+                
+                <!-- JSS & SSS SIDE BY SIDE -->
+                <div class="card">
+                    <div class="textbook-row">
+                        <!-- JSS COLUMN -->
+                        <div class="textbook-column">
+                            <h3>🏫 JSS (Junior Secondary)</h3>
+                            <div class="jss-sss-subjects" id="jssSubjects">
+                                <!-- Generated by JS -->
+                            </div>
+                        </div>
+                        
+                        <!-- SSS COLUMN -->
+                        <div class="textbook-column">
+                            <h3>🎓 SSS (Senior Secondary)</h3>
+                            <div class="jss-sss-subjects" id="sssSubjects">
+                                <!-- Generated by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TOPIC INPUT -->
+                <div class="card" id="topicCard" style="display: none;">
+                    <h2>🎯 Enter Your Topic & Generate Material</h2>
+                    <p style="color: var(--text-light); margin-bottom: 15px;"><strong id="selectedClassLabel">Select a subject above</strong> — Now type the specific topic you want to study</p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end;">
+                        <input type="text" id="topicInput" placeholder="e.g., Quadratic Equations, Photosynthesis, etc..." style="flex: 1; min-width: 200px; padding: 12px; border: 2px solid var(--border); border-radius: 10px; background: var(--bg-card); color: var(--text);">
+                        <button id="genTextbookBtn" onclick="generateTextbook(this)" style="padding: 12px 24px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; transition: all 0.3s; white-space: nowrap;">Generate 📚</button>
+                        <button class="voice-btn" onclick="speakText('textbookOutput', this)" title="Read aloud">🔊</button>
+                    </div>
+                </div>
+
+                <div id="textbookResult" class="card hidden">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 15px;">
+                        <h2 id="textbookTitle" style="margin: 0;">Your Study Note</h2>
+                        <button onclick="speakText('textbookOutput', this)" style="padding: 10px 20px; background: var(--success); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s;">🔊 Read Aloud</button>
+                    </div>
+                    <div id="textbookOutput" class="rich" style="background: var(--bg); padding: 25px; border-radius: 12px; border-left: 5px solid var(--primary); line-height: 1.8; max-height: 600px; overflow-y: auto; color: var(--text);"></div>
+                </div>
+            </div>
+
+            <!-- CHAT PAGE -->
+            <div id="chat" class="page">
+                <h1>🤖 AI Tutor - Ask Anything</h1>
+                <p style="color: var(--text-light); margin-bottom: 20px;">Ask me anything about your studies. I'm here 24/7 to help! 💡</p>
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <h2 style="margin: 0;">Chat with AI Tutor</h2>
+                        <button class="voice-btn" onclick="speakLastMessage()" title="Read last response aloud">🔊</button>
+                    </div>
+                    <div id="chatBox" style="height: 500px; overflow-y: auto; border: 2px solid var(--border); padding: 20px; border-radius: 12px; background: var(--bg); margin-bottom: 15px; display: flex; flex-direction: column; gap: 15px;">
+                        <div style="background: var(--border); color: var(--text); padding: 12px 16px; border-radius: 12px; max-width: 80%; align-self: flex-start;">
+                            <strong>AI Tutor:</strong> Hello! 👋 I'm your AI tutor. Ask me anything about Mathematics, Science, English, or any subject. I'm here to help!
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" id="chatInput" placeholder="Ask me anything..." style="flex: 1; padding: 12px; border: 2px solid var(--border); border-radius: 10px; background: var(--bg-card); color: var(--text);">
+                        <button class="voice-btn" onclick="startVoiceChat()" title="Speak your question">🎤</button>
+                        <button id="sendChatBtn" onclick="sendChat()" style="padding: 12px 24px; background: var(--primary); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; white-space: nowrap;">Send 📤</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAST QUESTIONS PAGE -->
+            <div id="pastquestions" class="page">
+                <h1>📝 Practice Past Exam Questions</h1>
+                <p style="color: var(--text-light); margin-bottom: 20px;">Practice with real exam-style questions. Select an exam, year and subject to start. You can generate up to 60 questions! 💪</p>
+                <div class="card">
+                    <h2>🎯 Select Exam Details</h2>
+                    <p style="color: var(--text-light); margin-bottom: 15px;">Choose the exam first, then the year and subject</p>
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px;">
+                        <select id="pqExam" class="pq-field" onchange="onExamChange()">
+                            <option value="">📋 Select Exam</option>
+                            <option value="WAEC">WAEC (WASSCE)</option>
+                            <option value="JAMB">JAMB (UTME)</option>
+                            <option value="NECO">NECO (SSCE)</option>
+                        </select>
+                        <select id="pqYear" class="pq-field"></select>
+                        <select id="pqSubject" class="pq-field" disabled></select>
+                    </div>
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 15px;">
+                        <select id="pqType" class="pq-field"></select>
+                        <input type="text" id="pqTopic" class="pq-field" placeholder="Topic (optional), e.g. Logarithms" style="flex: 2; min-width: 200px; font-weight: 400;">
+                        <button id="pqBtn" onclick="generatePastQuestions(this)" style="padding: 12px 24px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; white-space: nowrap; transition: all 0.3s;">Generate (10Q)</button>
+                        <button class="voice-btn" onclick="speakText('questionsContainer', this)" title="Read questions aloud">🔊</button>
+                    </div>
+                    <div style="background: var(--bg); padding: 15px; border-radius: 8px; color: var(--text-light); font-size: 14px; border-left: 4px solid var(--warning);">
+                        💡 <strong>Tip:</strong> Generate 10 questions to start. Click answers to see corrections. Up to 60 questions per session. Generate more will appear after each batch!
+                    </div>
+                </div>
+
+                <!-- PROGRESS TRACKER -->
+                <div id="progressSection" class="card hidden" style="margin-bottom: 20px;">
+                    <div class="question-progress">
+                        <div>
+                            <strong>Progress:</strong> <span id="questionCount">0</span> / 60 Questions
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- QUESTIONS DISPLAY -->
+                <div id="questionsResult" class="card hidden">
+                    <h2>📖 Questions & Answers</h2>
+                    <p id="questionsMeta" style="color: var(--text-light); font-size: 14px; margin-bottom: 5px;"></p>
+                    <p style="color: var(--text-light); font-size: 13px;">Click on an answer option to reveal the correction and explanation.</p>
+                    <div id="questionsContainer" style="line-height: 1.8; color: var(--text);"></div>
+                    
+                    <!-- GENERATE MORE BUTTON -->
+                    <button id="generateMoreBtn" class="btn-generate-more" onclick="generateMorePastQuestions(this)">
+                        ➕ Generate 10 More Questions
+                    </button>
+                </div>
+            </div>
+
+            <!-- SEARCH PAGE -->
+            <div id="search" class="page">
+                <h1>🌐 Web Search & Resources</h1>
+                <p style="color: var(--text-light); margin-bottom: 20px;">Find YouTube videos, articles, and tutorials. Results are cached - search the same topic again for instant results! 🎥</p>
+                <div class="card">
+                    <h2>🔍 Search for Videos & Articles</h2>
+                    <p style="color: var(--text-light); margin-bottom: 15px;">Type any topic and find helpful resources from across the web</p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <input type="text" id="searchQuery" placeholder="e.g., Photosynthesis, Trigonometry, Shakespeare..." style="flex: 1; min-width: 200px; padding: 12px; border: 2px solid var(--border); border-radius: 10px; background: var(--bg-card); color: var(--text);">
+                        <button id="searchBtn" onclick="performWebSearch(this)" style="padding: 12px 24px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; white-space: nowrap; transition: all 0.3s;">Search 🔍</button>
+                        <button class="voice-btn" onclick="startVoiceSearch()" title="Search by voice">🎤</button>
+                    </div>
+                    <div style="background: rgba(46, 204, 113, 0.1); padding: 12px; border-radius: 8px; color: var(--text-light); font-size: 13px; margin-top: 12px; border-left: 4px solid var(--success);">
+                        ⚡ Results are cached - search the same topic again for instant results from our cache!
+                    </div>
+                </div>
+                <div id="searchResult" class="card hidden">
+                    <h2>📊 Search Results</h2>
+                    <p id="cacheIndicator" style="font-size: 12px; color: var(--success); margin-bottom: 10px; display: none;">⚡ <strong>From Cache</strong></p>
+                    <div id="searchResultsList" style="color: var(--text);"></div>
+                </div>
+            </div>
+
+            <!-- LEADERBOARD PAGE -->
+            <div id="leaderboard" class="page">
+                <h1>🏆 Top Learners</h1>
+                <div class="card" style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; min-width: 380px;">
+                        <thead>
+                            <tr style="background: var(--primary); color: white;">
+                                <th style="padding: 15px; text-align: center; font-weight: 600; width: 80px;">Rank</th>
+                                <th style="padding: 15px; text-align: left; font-weight: 600;">Name</th>
+                                <th style="padding: 15px; text-align: left; font-weight: 600;">Score</th>
+                                <th style="padding: 15px; text-align: left; font-weight: 600;">Streak</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboardBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- PROFILE PAGE -->
+            <div id="profile" class="page">
+                <h1>⚙️ My Profile</h1>
+                <p style="color: var(--text-light); margin-bottom: 20px;">View and manage your account information</p>
+                
+                <div class="card">
+                    <h2>👤 Account Information</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 20px;">
+                        <div>
+                            <label style="font-weight: 600; display: block; margin-bottom: 8px;">📝 Username</label>
+                            <input type="text" id="profileUsername" style="width: 100%; padding: 12px; border: 2px solid var(--border); border-radius: 10px; background: var(--bg-card); color: var(--text);">
+                        </div>
+                        <div>
+                            <label style="font-weight: 600; display: block; margin-bottom: 8px;">📧 Email</label>
+                            <input type="email" id="profileEmail" disabled style="width: 100%; padding: 12px; border: 2px solid var(--border); border-radius: 10px; background: var(--bg-card); color: var(--text-light); opacity: 0.7;">
+                        </div>
+                    </div>
+                    <button onclick="saveProfile()" style="padding: 12px 24px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; transition: all 0.3s;">💾 Save Changes</button>
+                </div>
+
+                <div class="card">
+                    <h2>📊 Your Statistics</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px;">
+                        <div style="padding: 15px; background: var(--bg); border-radius: 8px; text-align: center;">
+                            <div style="font-size: 24px; font-weight: 700; color: var(--primary);" id="profileScore">0</div>
+                            <div style="font-size: 14px; color: var(--text-light);">Total Score</div>
+                        </div>
+                        <div style="padding: 15px; background: var(--bg); border-radius: 8px; text-align: center;">
+                            <div style="font-size: 24px; font-weight: 700; color: var(--success);" id="profileQuizzes">0</div>
+                            <div style="font-size: 14px; color: var(--text-light);">Quizzes Taken</div>
+                        </div>
+                        <div style="padding: 15px; background: var(--bg); border-radius: 8px; text-align: center;">
+                            <div style="font-size: 24px; font-weight: 700; color: var(--warning);" id="profileStreak">0</div>
+                            <div style="font-size: 14px; color: var(--text-light);">Learning Streak 🔥</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>🏆 Your Badges & Achievements</h2>
+                    <div id="profileBadges" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                        <span class="badge">🌟 Starter</span>
+                        <span class="badge">📚 Reader</span>
+                    </div>
+                    <p style="color: var(--text-light); margin-top: 15px; font-size: 14px;">Keep learning to unlock more badges! 🚀</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    // ============================================================
+    //  CONFIG
+    // ============================================================
+    const API_URL = "https://x-zith-backend.onrender.com";
+    const SESSION_KEY = 'xzith_user';       // keeps the user logged in across reloads
+    const PAGE_KEY = 'xzith_last_page';     // reopens the page the user was on
+    const REQUEST_TIMEOUT_MS = 90000;       // Render free servers can take ~1 min to wake up
+    const SLOW_SERVER_HINT_MS = 8000;
+    const SPEAK_LABEL = '🔊 Read Aloud';
+
+    let currentUser = null;
+    let notifications = [];
+    let darkMode = storeGet('darkMode') === 'true';
+    let selectedLevel = null;
+    let selectedSubject = null;
+    let chatBusy = false;
+    let isSpeaking = false;
+    let authErrorTimer = null;
+
+    // ============================================================
+    //  SUBJECT LISTS
+    // ============================================================
+    const JSS_SUBJECTS = {
+        'Core Subjects': ['English Language', 'Mathematics', 'Basic Science', 'Basic Technology', 'Social Studies', 'Civic Education', 'Computer Studies (ICT)'],
+        'Prevocational & Practical': ['Agricultural Science', 'Home Economics', 'Business Studies', 'Physical & Health Education', 'Cultural & Creative Arts', 'Security Education'],
+        'Religion & History': ['Christian Religious Studies', 'Islamic Religious Studies', 'History'],
+        'Languages': ['Yoruba', 'Igbo', 'Hausa', 'French', 'Arabic']
+    };
+
+    // Used for the SSS textbook AND for the WAEC / NECO past questions
+    const SSS_SUBJECTS = {
+        'Core Subjects': ['English Language', 'Mathematics', 'Civic Education'],
+        'Sciences': ['Physics', 'Chemistry', 'Biology', 'Further Mathematics', 'Agricultural Science', 'Geography', 'Computer Studies', 'Physical Education', 'Health Education', 'Technical Drawing'],
+        'Arts & Humanities': ['Literature in English', 'Government', 'History', 'Christian Religious Studies', 'Islamic Religious Studies', 'Visual Art', 'Music'],
+        'Commercial & Social Sciences': ['Economics', 'Financial Accounting', 'Commerce', 'Marketing', 'Insurance', 'Office Practice', 'Store Management'],
+        'Languages': ['Yoruba', 'Igbo', 'Hausa', 'French', 'Arabic'],
+        'Vocational & Technical': ['Food & Nutrition', 'Home Management', 'Catering Craft Practice', 'Clothing & Textiles', 'Animal Husbandry', 'Fisheries', 'Data Processing', 'Building Construction', 'Woodwork', 'Metalwork', 'Auto Mechanics', 'Electronics', 'Applied Electricity']
+    };
+
+    const JAMB_SUBJECTS = {
+        'Compulsory': ['Use of English'],
+        'Sciences': ['Mathematics', 'Physics', 'Chemistry', 'Biology', 'Agricultural Science', 'Computer Studies', 'Physical & Health Education'],
+        'Arts': ['Literature in English', 'Government', 'History', 'Christian Religious Studies', 'Islamic Religious Studies', 'Art (Fine Art)', 'Music'],
+        'Social Sciences & Commercial': ['Economics', 'Commerce', 'Principles of Accounts', 'Geography', 'Home Economics'],
+        'Languages': ['French', 'Yoruba', 'Igbo', 'Hausa', 'Arabic']
+    };
+
+    const TEXTBOOK_SUBJECTS = { JSS: JSS_SUBJECTS, SSS: SSS_SUBJECTS };
+    const PQ_SUBJECTS = { WAEC: SSS_SUBJECTS, NECO: SSS_SUBJECTS, JAMB: JAMB_SUBJECTS };
+
+    // ============================================================
+    //  SMALL HELPERS
+    // ============================================================
+    function storeGet(key) { try { return localStorage.getItem(key); } catch (e) { return null; } }
+    function storeSet(key, value) { try { localStorage.setItem(key, value); } catch (e) { /* private mode */ } }
+    function storeRemove(key) { try { localStorage.removeItem(key); } catch (e) { /* private mode */ } }
+
+    function $(id) { return document.getElementById(id); }
+
+    // Stops user / server text from being run as HTML
+    function escapeHtml(value) {
+        return String(value === undefined || value === null ? '' : value).replace(/[&<>"']/g, c => (
+            { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+        ));
+    }
+
+    function inlineFormat(escaped) {
+        return escaped
+            .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+            .replace(/(^|[^\w*])\*(?!\s)([^*]+?)\*(?![\w*])/g, '$1<em>$2</em>')
+            .replace(/`([^`]+?)`/g, '<code>$1</code>');
+    }
+
+    // Turns AI markdown-style text into safe, properly closed HTML
+    function formatRichText(text) {
+        const lines = escapeHtml(text).replace(/\r/g, '').split('\n');
+        let html = '';
+        let listType = null;
+        const closeList = () => { if (listType) { html += '</' + listType + '>'; listType = null; } };
+        const openList = type => { if (listType !== type) { closeList(); html += '<' + type + '>'; listType = type; } };
+
+        lines.forEach(raw => {
+            const line = raw.trim();
+            let m;
+            if (!line) { closeList(); return; }
+            if (/^(-{3,}|_{3,}|\*{3,})$/.test(line)) { closeList(); html += '<hr>'; return; }
+            if ((m = line.match(/^(#{1,6})\s+(.*)$/))) {
+                closeList();
+                const tag = m[1].length <= 2 ? 'h3' : 'h4';
+                html += '<' + tag + '>' + inlineFormat(m[2]) + '</' + tag + '>';
+            } else if ((m = line.match(/^[-*•]\s+(.*)$/))) {
+                openList('ul');
+                html += '<li>' + inlineFormat(m[1]) + '</li>';
+            } else if ((m = line.match(/^\d+[.)]\s+(.*)$/))) {
+                openList('ol');
+                html += '<li>' + inlineFormat(m[1]) + '</li>';
+            } else {
+                closeList();
+                html += '<p>' + inlineFormat(line) + '</p>';
+            }
+        });
+        closeList();
+        return html;
+    }
+
+    function safeUrl(url) {
+        try {
+            const u = new URL(url, window.location.href);
+            return (u.protocol === 'http:' || u.protocol === 'https:') ? u.href : '#';
+        } catch (e) { return '#'; }
+    }
+
+    function showToast(message, type = 'info', duration = 4000) {
+        const box = $('toastBox');
+        if (!box) return;
+        const toast = document.createElement('div');
+        toast.className = 'toast ' + type;
+        toast.textContent = message;
+        box.appendChild(toast);
+        setTimeout(() => toast.remove(), duration);
+    }
+
+    // Disables a button and shows a label while an async task runs
+    async function withLoading(btn, label, task) {
+        if (btn && btn.disabled) return;
+        const original = btn ? btn.innerHTML : '';
+        if (btn) { btn.disabled = true; btn.innerHTML = label; btn.style.opacity = '0.7'; }
+        try {
+            return await task();
+        } finally {
+            if (btn) { btn.disabled = false; btn.innerHTML = original; btn.style.opacity = ''; }
+        }
+    }
+
+    function onEnter(id, handler) {
+        const el = $(id);
+        if (el) el.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); handler(); } });
+    }
+
+    // ============================================================
+    //  API
+    // ============================================================
+    async function apiCall(endpoint, data, method = 'POST') {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+        const slowHint = setTimeout(() => {
+            showToast('⏳ Waking up the server... the first request can take up to a minute.', 'info', 9000);
+        }, SLOW_SERVER_HINT_MS);
+
+        try {
+            const options = { method, signal: controller.signal };
+            if (method !== 'GET') {
+                options.headers = { 'Content-Type': 'application/json' };
+                if (data) options.body = JSON.stringify(data);
+            }
+            const res = await fetch(API_URL + endpoint, options);
+
+            let body = null;
+            try { body = await res.json(); } catch (e) { body = null; }
+
+            if (!res.ok) {
+                let msg = body && (body.error || body.detail || body.message);
+                if (msg && typeof msg !== 'string') msg = JSON.stringify(msg);
+                return { error: msg || ('Server error (' + res.status + ')'), status: res.status };
+            }
+            return body || {};
+        } catch (err) {
+            if (err.name === 'AbortError') {
+                return { error: 'The server took too long to respond. Please try again.' };
+            }
+            return { error: 'Cannot reach the server. Check your internet connection and try again.' };
+        } finally {
+            clearTimeout(timeout);
+            clearTimeout(slowHint);
+        }
+    }
+
+    // Wakes a sleeping Render server in the background (response is ignored)
+    function wakeServer() {
+        try { fetch(API_URL + '/', { mode: 'no-cors' }).catch(() => {}); } catch (e) { /* ignore */ }
+    }
+
+    // ============================================================
+    //  DARK MODE
+    // ============================================================
+    function toggleTheme() {
+        darkMode = !darkMode;
+        storeSet('darkMode', darkMode);
+        document.body.classList.toggle('dark-mode', darkMode);
+        $('landingThemeIcon').textContent = darkMode ? '☀️' : '🌙';
+        $('appThemeIcon').textContent = darkMode ? '☀️' : '🌙';
+    }
+
+    // ============================================================
+    //  LANDING / AUTH NAVIGATION
+    // ============================================================
+    function showLoginPage() {
+        $('landingPage').classList.add('hidden');
+        $('authPage').classList.remove('hidden');
+        switchAuthTab('login');
+    }
+
+    function showSignupPage() {
+        $('landingPage').classList.add('hidden');
+        $('authPage').classList.remove('hidden');
+        switchAuthTab('signup');
+    }
+
+    function goBackToLanding() {
+        $('authPage').classList.add('hidden');
+        $('landingPage').classList.remove('hidden');
+        switchAuthTab('login');
+        window.scrollTo(0, 0);
+    }
+
+    function scrollToFeatures() {
+        $('featuresSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function switchAuthTab(tab) {
+        $('loginTab').classList.toggle('hidden', tab !== 'login');
+        $('signupTab').classList.toggle('hidden', tab !== 'signup');
+        $('tabLoginBtn').classList.toggle('active', tab === 'login');
+        $('tabSignupBtn').classList.toggle('active', tab === 'signup');
+        $('errorMsg').classList.remove('show');
+    }
+
+    // ============================================================
+    //  SESSION (stay logged in after reload)
+    // ============================================================
+    function normalizeUser(user) {
+        const u = Object.assign({}, user);
+        u.username = u.username || u.name || (u.email ? String(u.email).split('@')[0] : 'Student');
+        return u;
+    }
+
+    function saveSession() {
+        if (!currentUser) return;
+        const safe = Object.assign({}, currentUser);
+        delete safe.password;
+        delete safe.password_hash;
+        delete safe.hashed_password;
+        storeSet(SESSION_KEY, JSON.stringify(safe));
+    }
+
+    function restoreSession() {
+        const raw = storeGet(SESSION_KEY);
+        if (!raw) return false;
+        try {
+            const user = JSON.parse(raw);
+            if (user && (user.username || user.email)) {
+                currentUser = normalizeUser(user);
+                return true;
+            }
+        } catch (e) { /* corrupted data, fall through */ }
+        storeRemove(SESSION_KEY);
+        return false;
+    }
+
+    function startSession(user) {
+        currentUser = normalizeUser(user);
+        saveSession();
+        enterApp();
+        switchPage('dashboard');
+    }
+
+    // ============================================================
+    //  AUTH
+    // ============================================================
+    function showError(msg, type = 'error') {
+        const authVisible = !$('authPage').classList.contains('hidden');
+        if (authVisible) {
+            const el = $('errorMsg');
+            el.textContent = msg;
+            el.classList.add('show');
+            if (type === 'success') {
+                el.style.background = 'rgba(46, 204, 113, 0.1)';
+                el.style.color = 'var(--success)';
+                el.style.borderLeft = '4px solid var(--success)';
+            } else {
+                el.style.background = 'rgba(231, 76, 60, 0.1)';
+                el.style.color = 'var(--danger)';
+                el.style.borderLeft = '4px solid var(--danger)';
+            }
+            clearTimeout(authErrorTimer);
+            authErrorTimer = setTimeout(() => el.classList.remove('show'), 5000);
+        } else {
+            showToast(msg, type === 'success' ? 'success' : 'error', 5000);
+        }
+    }
+
+    async function handleLogin(btn) {
+        const email = $('loginEmail').value.trim();
+        const pass = $('loginPass').value;
+        if (!email || !pass) {
+            showError('Fill all fields');
+            return;
+        }
+        await withLoading(btn, 'Logging in...', async () => {
+            const res = await apiCall('/api/login', { email, password: pass });
+            if (res.user) {
+                startSession(res.user);
+                addNotification('Welcome!', 'Welcome back, ' + currentUser.username + '!');
+            } else {
+                showError(res.error || 'Login failed');
+            }
+        });
+    }
+
+    async function handleSignup(btn) {
+        const name = $('signupName').value.trim();
+        const email = $('signupEmail').value.trim();
+        const pass = $('signupPass').value;
+        if (!name || !email || !pass) {
+            showError('Fill all fields');
+            return;
+        }
+        if (pass.length < 6) {
+            showError('Password must be at least 6 characters');
+            return;
+        }
+        await withLoading(btn, 'Creating account...', async () => {
+            const res = await apiCall('/api/signup', { username: name, email, password: pass });
+            if (res.user) {
+                startSession(res.user);
+                addNotification('Welcome!', 'Welcome to X-ZITH, ' + currentUser.username + '!');
+            } else if (res.success) {
+                showError('Account created! Now login.', 'success');
+                $('loginEmail').value = email;
+                setTimeout(() => switchAuthTab('login'), 1500);
+            } else {
+                showError(res.error || 'Signup failed');
+            }
+        });
+    }
+
+    function logout() {
+        currentUser = null;
+        notifications = [];
+        storeRemove(SESSION_KEY);
+        storeRemove(PAGE_KEY);
+        window.speechSynthesis && window.speechSynthesis.cancel();
+        isSpeaking = false;
+
+        // Clear anything the last user saw so the next person on this device starts clean
+        resetChat();
+        $('textbookResult').classList.add('hidden');
+        $('questionsResult').classList.add('hidden');
+        $('searchResult').classList.add('hidden');
+        ['loginEmail', 'loginPass', 'signupName', 'signupEmail', 'signupPass', 'topicInput', 'searchQuery', 'pqTopic']
+            .forEach(id => { $(id).value = ''; });
+        updateNotificationBadge();
+        updateNotificationsList();
+        $('notificationDropdown').classList.remove('active');
+        $('mobileMenu').classList.remove('active');
+
+        $('appPage').classList.add('hidden');
+        $('authPage').classList.add('hidden');
+        $('landingPage').classList.remove('hidden');
+        document.documentElement.classList.remove('has-session');
+        switchAuthTab('login');
+        window.scrollTo(0, 0);
+    }
+
+    // ============================================================
+    //  APP SHELL
+    // ============================================================
+    function enterApp() {
+        $('landingPage').classList.add('hidden');
+        $('authPage').classList.add('hidden');
+        $('appPage').classList.remove('hidden');
+        $('appThemeIcon').textContent = darkMode ? '☀️' : '🌙';
+        $('navUser').textContent = currentUser.username;
+        $('dashName').textContent = currentUser.username;
+        $('profileUsername').value = currentUser.username;
+        updateDashboard();
+    }
+
+    function updateDashboard() {
+        if (!currentUser) return;
+        $('dashScore').textContent = currentUser.total_score || 0;
+        $('dashQuizzes').textContent = currentUser.quizzes_taken || 0;
+        $('dashStreak').textContent = currentUser.streak || 0;
+    }
+
+    function switchPage(pageId) {
+        let target = $(pageId);
+        if (!target || !target.classList.contains('page')) {
+            pageId = 'dashboard';
+            target = $('dashboard');
+        }
+
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        target.classList.add('active');
+
+        // Highlight the current page in both menus
+        document.querySelectorAll('[data-page]').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.page === pageId);
+        });
+
+        $('notificationDropdown').classList.remove('active');
+        storeSet(PAGE_KEY, pageId);
+        window.scrollTo(0, 0);
+
+        if (pageId === 'profile') {
+            populateProfile();
+        } else if (pageId === 'leaderboard') {
+            loadLeaderboard();
+        } else if (pageId === 'dashboard') {
+            updateDashboard();
+        }
+    }
+
+    function populateProfile() {
+        if (!currentUser) return;
+        $('profileUsername').value = currentUser.username || '';
+        $('profileEmail').value = currentUser.email || '';
+        $('profileScore').textContent = currentUser.total_score || 0;
+        $('profileQuizzes').textContent = currentUser.quizzes_taken || 0;
+        $('profileStreak').textContent = currentUser.streak || 0;
+    }
+
+    // ============================================================
+    //  NOTIFICATIONS
+    // ============================================================
+    function toggleNotifications() {
+        $('notificationDropdown').classList.toggle('active');
+    }
+
+    function addNotification(title, message) {
+        notifications.unshift({ title, message, read: false });
+        if (notifications.length > 30) notifications.length = 30;
+        updateNotificationBadge();
+        updateNotificationsList();
+    }
+
+    function updateNotificationBadge() {
+        const badge = $('notificationBadge');
+        const unread = notifications.filter(n => !n.read).length;
+        if (unread > 0) {
+            badge.style.display = 'flex';
+            badge.textContent = unread;
+        } else {
+            badge.style.display = 'none';
+        }
+    }
+
+    function updateNotificationsList() {
+        const list = $('notificationsList');
+        list.innerHTML = '';
+        if (notifications.length === 0) {
+            list.innerHTML = '<div class="notification-item">No notifications yet</div>';
+            return;
+        }
+        notifications.forEach(notif => {
+            const div = document.createElement('div');
+            div.className = 'notification-item' + (notif.read ? ' read' : '');
+            div.onclick = () => { notif.read = true; div.classList.add('read'); updateNotificationBadge(); };
+            div.innerHTML = '<strong>' + escapeHtml(notif.title) + '</strong><br><small>' + escapeHtml(notif.message) + '</small>';
+            list.appendChild(div);
+        });
+    }
+
+    function markAllAsRead() {
+        notifications.forEach(n => { n.read = true; });
+        updateNotificationBadge();
+        updateNotificationsList();
+    }
+
+    // ============================================================
+    //  TEXTBOOK
+    // ============================================================
+    // ===== TEXTBOOK SUBJECT SELECTION =====
+    function initTextbookSubjects() {
+        // Populate JSS subjects
+        const jssContainer = $('jssSubjects');
+        Object.values(JSS_SUBJECTS).forEach(subjectList => {
+            subjectList.forEach(subject => {
+                const item = document.createElement('div');
+                item.className = 'subject-item';
+                item.textContent = subject;
+                item.onclick = () => selectTextbookSubject(subject, 'JSS', item);
+                jssContainer.appendChild(item);
+            });
+        });
+
+        // Populate SSS subjects
+        const sssContainer = $('sssSubjects');
+        Object.values(SSS_SUBJECTS).forEach(subjectList => {
+            subjectList.forEach(subject => {
+                const item = document.createElement('div');
+                item.className = 'subject-item';
+                item.textContent = subject;
+                item.onclick = () => selectTextbookSubject(subject, 'SSS', item);
+                sssContainer.appendChild(item);
+            });
+        });
+    }
+
+    function selectTextbookSubject(subject, level, element) {
+        selectedLevel = level;
+        selectedSubject = subject;
+
+        // Remove previous selection
+        document.querySelectorAll('.subject-item').forEach(item => item.classList.remove('selected'));
+        element.classList.add('selected');
+
+        // Show topic card and update label
+        $('topicCard').style.display = 'block';
+        $('selectedClassLabel').textContent = `${subject} (${level})`;
+        $('topicInput').focus();
+        
+        addNotification('📖 Subject Selected', subject + ' • ' + level);
+    }
+
+    function selectLevel(level) {
+        selectedLevel = level;
+        selectedSubject = null;
+
+        ['JSS', 'SSS'].forEach(l => {
+            const btn = $('btn-' + l.toLowerCase());
+            if (btn) {
+                const active = l === level;
+                btn.style.background = active ? 'var(--primary)' : 'var(--bg-card)';
+                btn.style.color = active ? 'white' : 'var(--text)';
+                btn.style.borderColor = active ? 'var(--primary)' : 'var(--border)';
+            }
+        });
+
+        $('subjectsCard').style.display = 'block';
+        $('topicCard').style.display = 'none';
+        addNotification('📚 Level Selected', 'You selected ' + level);
+    }
+
+    function selectSubject(subject, buttonElement) {
+        selectedSubject = subject;
+
+        document.querySelectorAll('#subjectsList button').forEach(btn => {
+            btn.style.background = 'var(--bg-card)';
+            btn.style.color = 'var(--text)';
+            btn.style.borderColor = 'var(--border)';
+        });
+
+        buttonElement.style.background = 'var(--primary)';
+        buttonElement.style.color = 'white';
+        buttonElement.style.borderColor = 'var(--primary)';
+
+        $('topicCard').style.display = 'block';
+        addNotification('📖 Subject Selected', 'You selected ' + subject);
+    }
+
+    async function generateTextbook(btn) {
+        const topic = $('topicInput').value.trim();
+
+        if (!selectedLevel) { showError('Please select a level (JSS or SSS)'); return; }
+        if (!selectedSubject) { showError('Please select a subject'); return; }
+        if (!topic) { showError('Please enter a topic'); return; }
+
+        await withLoading(btn, 'Generating...', async () => {
+            const res = await apiCall('/api/generate-textbook', {
+                level: selectedLevel,
+                subject: selectedSubject,
+                topic: topic
+            });
+
+            const content = res.note || res.response || res.textbook || res.content || res.text;
+            if (res.error || !content) {
+                showError(res.error || 'Could not generate notes. Please try again.');
+                return;
+            }
+
+            $('textbookTitle').textContent = topic + ' - Study Notes';
+            $('textbookOutput').innerHTML = formatRichText(typeof content === 'string' ? content : JSON.stringify(content, null, 2));
+            $('textbookResult').classList.remove('hidden');
+            $('textbookResult').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            addNotification('✅ Textbook Generated', 'Your study notes on "' + topic + '" are ready! 📚');
+        });
+    }
+
+    function speakText(elementId, btn) {
+        if (!('speechSynthesis' in window)) {
+            showError('Read aloud is not supported on this browser.');
+            return;
+        }
+        const synth = window.speechSynthesis;
+
+        // Second click stops reading
+        if (isSpeaking || synth.speaking) {
+            synth.cancel();
+            isSpeaking = false;
+            if (btn) btn.innerHTML = SPEAK_LABEL;
+            return;
+        }
+
+        const el = $(elementId);
+        const text = el ? el.innerText.trim() : '';
+        if (!text) return;
+
+        // Long text is read in small chunks (some browsers cut off long utterances)
+        const sentences = text.match(/[^.!?\n]+[.!?]*\s*/g) || [text];
+        const chunks = [];
+        let current = '';
+        sentences.forEach(s => {
+            if ((current + s).length > 220 && current) { chunks.push(current); current = s; }
+            else { current += s; }
+        });
+        if (current.trim()) chunks.push(current);
+
+        isSpeaking = true;
+        if (btn) btn.innerHTML = '⏹ Stop';
+        chunks.forEach((chunk, i) => {
+            const utterance = new SpeechSynthesisUtterance(chunk);
+            utterance.rate = 0.9;
+            if (i === chunks.length - 1) {
+                utterance.onend = utterance.onerror = () => {
+                    isSpeaking = false;
+                    if (btn) btn.innerHTML = SPEAK_LABEL;
+                };
+            }
+            synth.speak(utterance);
+        });
+    }
+
+    // ============================================================
+    //  AI CHAT
+    // ============================================================
+    const CHAT_GREETING = '<div style="background: var(--border); color: var(--text); padding: 12px 16px; border-radius: 12px; max-width: 80%; align-self: flex-start;"><strong>AI Tutor:</strong> Hello! 👋 I\'m your AI tutor. Ask me anything about Mathematics, Science, English, or any subject. I\'m here to help!</div>';
+
+    function resetChat() {
+        $('chatBox').innerHTML = CHAT_GREETING;
+        chatBusy = false;
+    }
+
+    function addChatBubble(role, text) {
+        const box = $('chatBox');
+        const div = document.createElement('div');
+        let css = 'padding: 12px 16px; border-radius: 12px; max-width: 80%; word-wrap: break-word; overflow-wrap: anywhere; line-height: 1.6;';
+
+        if (role === 'user') {
+            div.style.cssText = css + ' background: var(--primary); color: white; align-self: flex-end; white-space: pre-wrap;';
+            div.textContent = 'You: ' + text;
+        } else if (role === 'error') {
+            div.style.cssText = css + ' background: #e74c3c; color: white; align-self: flex-start;';
+            div.textContent = '⚠️ ' + text;
+        } else if (role === 'typing') {
+            div.style.cssText = css + ' background: var(--border); color: var(--text-light); align-self: flex-start; font-style: italic;';
+            div.textContent = 'AI Tutor is thinking...';
+        } else {
+            div.style.cssText = css + ' background: var(--border); color: var(--text); align-self: flex-start;';
+            div.innerHTML = '<strong>AI Tutor:</strong><div class="rich">' + formatRichText(text) + '</div>';
+        }
+
+        box.appendChild(div);
+        box.scrollTop = box.scrollHeight;
+        return div;
+    }
+
+    async function sendChat() {
+        const input = $('chatInput');
+        const msg = input.value.trim();
+        if (!msg || chatBusy) return;
+
+        chatBusy = true;
+        $('sendChatBtn').disabled = true;
+        addChatBubble('user', msg);
+        input.value = '';
+        const typing = addChatBubble('typing');
+
+        try {
+            const res = await apiCall('/api/chat', { message: msg });
+            typing.remove();
+            const reply = res.response || res.message || res.reply || res.answer;
+            if (res.error || !reply) {
+                addChatBubble('error', res.error || 'I could not generate a response. Please try again.');
+            } else {
+                addChatBubble('ai', typeof reply === 'string' ? reply : JSON.stringify(reply));
+            }
+        } finally {
+            chatBusy = false;
+            $('sendChatBtn').disabled = false;
+            input.focus();
+        }
+    }
+
+    // ============================================================
+    //  PAST QUESTIONS
+    // ============================================================
+    function populateYears() {
+        let html = '<option value="">📅 Select Year</option>';
+        html += '<option value="2026">2026</option>';
+        html += '<option value="2025">2025</option>';
+        html += '<option value="2024">2024</option>';
+        $('pqYear').innerHTML = html;
+    }
+
+    function onExamChange() {
+        const exam = $('pqExam').value;
+        const subjectSelect = $('pqSubject');
+
+        if (!exam) {
+            subjectSelect.innerHTML = '<option value="">📚 Select an exam first</option>';
+            subjectSelect.disabled = true;
+        } else {
+            let html = '<option value="">📚 Select Subject</option>';
+            Object.entries(PQ_SUBJECTS[exam]).forEach(([group, subjects]) => {
+                html += '<optgroup label="' + escapeHtml(group) + '">' +
+                    subjects.map(s => '<option value="' + escapeHtml(s) + '">' + escapeHtml(s) + '</option>').join('') +
+                    '</optgroup>';
+            });
+            subjectSelect.innerHTML = html;
+            subjectSelect.disabled = false;
+        }
+
+        // JAMB UTME is objective only; WAEC and NECO also have theory papers
+        $('pqType').innerHTML = exam === 'JAMB'
+            ? '<option value="Objective">Objective (CBT)</option>'
+            : '<option value="Objective">Objective</option><option value="Theory">Theory / Essay</option>';
+    }
+
+    // Accepts text or an array of question objects and returns plain text
+    function questionsToText(data) {
+        if (typeof data === 'string') return data;
+        if (!Array.isArray(data)) return '';
+        return data.map((item, i) => {
+            if (typeof item === 'string') return item;
+            const q = item.question || item.q || item.text || '';
+            let out = (i + 1) + '. ' + q;
+            const opts = item.options || item.choices;
+            if (Array.isArray(opts)) {
+                opts.forEach((o, k) => { out += '\n' + String.fromCharCode(65 + k) + ') ' + o; });
+            } else if (opts && typeof opts === 'object') {
+                Object.entries(opts).forEach(([k, v]) => { out += '\n' + k + ') ' + v; });
+            }
+            const ans = item.answer || item.correct_answer;
+            if (ans) out += '\nAnswer: ' + ans;
+            if (item.explanation) out += '\nExplanation: ' + item.explanation;
+            return out;
+        }).join('\n\n');
+    }
+
+    function formatQuestionLine(line) {
+        const text = inlineFormat(line.trim());
+        if (/^\(?[A-Ea-e][).:]\s/.test(text)) {
+            return '<span class="q-option">' + text.replace(/^\(?([A-Ea-e])[).:]\s*/, '<strong>$1)</strong> ') + '</span>';
+        }
+        if (/^(?:<strong>)?(Correct\s+)?Answer\s*[:\-]/i.test(text)) {
+            return '<span class="q-answer">' + text + '</span>';
+        }
+        if (/^(?:<strong>)?(Explanation|Solution|Working|Marking)/i.test(text)) {
+            return '<span class="q-expl">' + text + '</span>';
+        }
+        return text;
+    }
+
+    // Splits the raw text into one card per question
+    function formatQuestions(text) {
+        const lines = escapeHtml(text).replace(/\r/g, '').trim().split('\n');
+        const startRe = /^\s*(?:\*\*)?(?:Question\s*)?\d+\s*[.):]/i;
+        const numbered = lines.filter(l => startRe.test(l)).length >= 2;
+        const blocks = [];
+        let cur = [];
+
+        lines.forEach(line => {
+            const blank = !line.trim();
+            if (numbered) {
+                if (startRe.test(line) && cur.length) { blocks.push(cur); cur = []; }
+                if (!blank) cur.push(line);
+            } else if (blank) {
+                if (cur.length) { blocks.push(cur); cur = []; }
+            } else {
+                cur.push(line);
+            }
+        });
+        if (cur.length) blocks.push(cur);
+
+        return blocks.map(block => '<div class="q-card">' + block.map(formatQuestionLine).join('<br>') + '</div>').join('');
+    }
+
+    async function generatePastQuestions(btn) {
+        const exam = $('pqExam').value;
+        const year = $('pqYear').value;
+        const subject = $('pqSubject').value;
+        const qtype = $('pqType').value || 'Objective';
+        const count = parseInt($('pqCount').value, 10) || 10;
+        const topic = $('pqTopic').value.trim();
+
+        if (!exam || !year || !subject) {
+            showError('Please select the exam, year and subject');
+            return;
+        }
+
+        await withLoading(btn, 'Generating...', async () => {
+            const payload = { exam, year, subject, qtype, count };
+            if (topic) payload.topic = topic;
+            const res = await apiCall('/api/generate-past-questions', payload);
+
+            const content = questionsToText(res.raw || res.response || res.questions || res.content);
+            if (res.error || !content.trim()) {
+                showError(res.error || 'Could not generate questions. Please try again.');
+                return;
+            }
+
+            $('questionsMeta').textContent = exam + ' ' + year + ' • ' + subject + ' • ' + qtype + (topic ? ' • ' + topic : '');
+            $('questionsContainer').innerHTML = formatQuestions(content);
+            $('questionsResult').classList.remove('hidden');
+            $('questionsResult').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            addNotification('✅ Questions Generated', exam + ' ' + year + ' ' + subject + ' questions are ready!');
+        });
+    }
+
+    // ===== VOICE FUNCTIONS =====
+    function startVoiceChat() {
+        if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+            showError('Voice recognition not supported on this device');
+            return;
+        }
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.onstart = () => showNotification('🎤 Listening...', 'Speak your question');
+        recognition.onresult = (e) => {
+            const text = Array.from(e.results)
+                .map(r => r[0].transcript)
+                .join('');
+            $('chatInput').value = text;
+            $('chatInput').focus();
+            sendChat();
+        };
+        recognition.onerror = () => showError('Microphone not available');
+        recognition.start();
+    }
+
+    function startVoiceSearch() {
+        if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+            showError('Voice recognition not supported on this device');
+            return;
+        }
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.onstart = () => showNotification('🎤 Listening...', 'Speak your search term');
+        recognition.onresult = (e) => {
+            const text = Array.from(e.results)
+                .map(r => r[0].transcript)
+                .join('');
+            $('searchQuery').value = text;
+            performWebSearch($('searchBtn'));
+        };
+        recognition.onerror = () => showError('Microphone not available');
+        recognition.start();
+    }
+
+    function speakText(elementId, btn) {
+        const element = $(elementId);
+        if (!element || !element.textContent.trim()) {
+            showError('Nothing to read');
+            return;
+        }
+
+        if ('speechSynthesis' in window) {
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+                btn.textContent = '🔊';
+                return;
+            }
+            const utterance = new SpeechSynthesisUtterance(element.innerText.substring(0, 5000));
+            utterance.rate = 0.9;
+            utterance.onend = () => { btn.textContent = '🔊'; };
+            btn.textContent = '⏸️';
+            speechSynthesis.speak(utterance);
+        }
+    }
+
+    function speakLastMessage() {
+        const messages = document.querySelectorAll('#chatBox > div');
+        if (messages.length > 0) {
+            const lastMessage = messages[messages.length - 1].textContent;
+            if ('speechSynthesis' in window) {
+                speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(lastMessage);
+                utterance.rate = 0.9;
+                speechSynthesis.speak(utterance);
+            }
+        }
+    }
+
+    // ===== PAST QUESTIONS WITH CORRECTIONS & PROGRESS =====
+    let totalQuestionsGenerated = 0;
+    let currentExam = '', currentYear = '', currentSubject = '', currentTopic = '', currentQType = '';
+
+    async function generatePastQuestions(btn) {
+        const exam = $('pqExam').value;
+        const year = $('pqYear').value;
+        const subject = $('pqSubject').value;
+        const qtype = $('pqType').value || 'Objective';
+        const topic = $('pqTopic').value.trim();
+
+        if (!exam || !year || !subject) {
+            showError('Please select the exam, year and subject');
+            return;
+        }
+
+        // Store for "Generate More"
+        currentExam = exam;
+        currentYear = year;
+        currentSubject = subject;
+        currentTopic = topic;
+        currentQType = qtype;
+        totalQuestionsGenerated = 0;
+
+        await withLoading(btn, 'Generating first 10 questions...', async () => {
+            const payload = { exam, year, subject, qtype, count: 10 };
+            if (topic) payload.topic = topic;
+            const res = await apiCall('/api/generate-past-questions', payload);
+
+            const content = questionsToText(res.raw || res.response || res.questions || res.content);
+            if (res.error || !content.trim()) {
+                showError(res.error || 'Could not generate questions. Please try again.');
+                return;
+            }
+
+            $('questionsMeta').textContent = exam + ' ' + year + ' • ' + subject + ' • ' + qtype + (topic ? ' • ' + topic : '');
+            $('questionsContainer').innerHTML = formatQuestionsWithCorrections(content);
+            totalQuestionsGenerated = 10;
+            updateProgressBar();
+            $('progressSection').classList.remove('hidden');
+            $('questionsResult').classList.remove('hidden');
+            $('generateMoreBtn').classList.toggle('show', totalQuestionsGenerated < 60);
+            $('questionsResult').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            addNotification('✅ 10 Questions Generated', 'Click answers to see corrections!');
+        });
+    }
+
+    async function generateMorePastQuestions(btn) {
+        if (totalQuestionsGenerated >= 60) {
+            showNotification('✨ Limit Reached', 'You have generated the maximum 60 questions', 'success');
+            $('generateMoreBtn').classList.remove('show');
+            return;
+        }
+
+        await withLoading(btn, 'Generating 10 more questions...', async () => {
+            const payload = {
+                exam: currentExam,
+                year: currentYear,
+                subject: currentSubject,
+                qtype: currentQType,
+                count: 10
+            };
+            if (currentTopic) payload.topic = currentTopic;
+            const res = await apiCall('/api/generate-past-questions', payload);
+
+            const content = questionsToText(res.raw || res.response || res.questions || res.content);
+            if (res.error || !content.trim()) {
+                showError(res.error || 'Could not generate more questions.');
+                return;
+            }
+
+            const newQuestionsHtml = formatQuestionsWithCorrections(content);
+            $('questionsContainer').innerHTML += newQuestionsHtml;
+            totalQuestionsGenerated += 10;
+            updateProgressBar();
+            $('generateMoreBtn').classList.toggle('show', totalQuestionsGenerated < 60);
+            $('questionsResult').scrollIntoView({ behavior: 'smooth', block: 'end' });
+            addNotification('✅ 10 More Questions Added', totalQuestionsGenerated + ' / 60 questions generated');
+        });
+    }
+
+    function updateProgressBar() {
+        const percentage = (totalQuestionsGenerated / 60) * 100;
+        $('questionCount').textContent = totalQuestionsGenerated;
+        $('progressFill').style.width = percentage + '%';
+    }
+
+    function formatQuestionsWithCorrections(text) {
+        const lines = text.split('\n').filter(l => l.trim());
+        let html = '';
+        let currentQ = null;
+        let qNum = totalQuestionsGenerated + 1;
+
+        lines.forEach(line => {
+            const trimmed = line.trim();
+            if (/^\d+[\.\)]\s+/.test(trimmed) || /^Q\d+:|^Question \d+:/i.test(trimmed)) {
+                if (currentQ) html += '</div>';
+                currentQ = trimmed.replace(/^\d+[\.\)]\s*/, '').replace(/^Q\d+:\s*/, '');
+                html += `<div class="pq-question" style="margin-bottom: 25px; padding: 20px; background: var(--bg); border-radius: 10px; border-left: 4px solid var(--primary);">
+                    <div style="font-weight: 700; color: var(--primary); margin-bottom: 15px;">Q${qNum}: ${escapeHtml(currentQ)}</div>`;
+                qNum++;
+            } else if (/^[A-D]\s*[\.\)]\s+/.test(trimmed)) {
+                const option = trimmed.match(/^([A-D])/)[1];
+                const text = trimmed.replace(/^[A-D]\s*[\.\)]\s*/, '');
+                const isCorrect = /^✓|correct|answer|right/i.test(text);
+                html += `<div style="padding: 12px 15px; margin: 10px 0; background: var(--bg-card); border-radius: 8px; border-left: 3px solid ${isCorrect ? 'var(--success)' : 'var(--border)'}; cursor: pointer;" onclick="showCorrection(event)">
+                    <strong>${option})</strong> ${escapeHtml(text.replace(/^✓\s*/, ''))}
+                </div>`;
+            } else if (trimmed && /^(explanation|answer|why|because|note)/i.test(trimmed)) {
+                html += `<div class="correction-box" style="display: none;">
+                    <strong>✓ Explanation:</strong>
+                    <p style="margin-top: 8px;">${escapeHtml(trimmed)}</p>
+                </div>`;
+            }
+        });
+
+        if (currentQ) html += '</div>';
+        return html;
+    }
+
+    function showCorrection(event) {
+        const correction = event.currentTarget.parentElement.querySelector('.correction-box');
+        if (correction) {
+            correction.classList.toggle('show');
+            correction.style.display = correction.style.display === 'none' ? 'block' : 'none';
+        }
+    }
+
+    // ============================================================
+    //  WEB SEARCH WITH CACHING
+    // ============================================================
+    let searchCache = {};
+    function searchLinksHtml(query) {
+        const q = encodeURIComponent(query);
+        const linkStyle = 'display: inline-block; margin: 4px 8px 4px 0; padding: 10px 16px; background: var(--primary); color: white; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;';
+        return '<div style="margin-top: 20px;"><p style="color: var(--text-light); font-size: 14px; margin-bottom: 8px;">Search "' + escapeHtml(query) + '" directly on:</p>' +
+            '<a style="' + linkStyle + '" target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/results?search_query=' + q + '">🎥 YouTube</a>' +
+            '<a style="' + linkStyle + '" target="_blank" rel="noopener noreferrer" href="https://www.google.com/search?q=' + q + '">🔍 Google</a>' +
+            '<a style="' + linkStyle + '" target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/w/index.php?search=' + q + '">📚 Wikipedia</a></div>';
+    }
+
+    async function performWebSearch(btn) {
+        const query = $('searchQuery').value.trim();
+        if (!query) {
+            showError('Please enter a search query');
+            return;
+        }
+
+        // Check cache first
+        if (searchCache[query]) {
+            displaySearchResults(searchCache[query], query, true);
+            return;
+        }
+
+        await withLoading(btn, 'Searching...', async () => {
+            const res = await apiCall('/api/search', { q: query });
+            const box = '<div style="padding: 15px; background: var(--bg); border-radius: 8px; color: var(--text-light);">';
+            let html = '';
+            const items = Array.isArray(res.results) ? res.results : (Array.isArray(res.items) ? res.items : null);
+
+            if (res.error) {
+                html = box + '⚠️ ' + escapeHtml(res.error) + '</div>';
+            } else if (items && items.length) {
+                items.forEach(result => {
+                    const link = safeUrl(result.link || result.url || '');
+                    const snippet = result.snippet || result.description || result.body || 'No description available';
+                    html += '<div style="margin-bottom: 20px; padding: 15px; background: var(--bg); border-radius: 8px; border-left: 4px solid var(--primary); overflow-wrap: anywhere;">' +
+                        '<h3 style="margin-bottom: 8px; font-size: 18px;"><a href="' + escapeHtml(link) + '" target="_blank" rel="noopener noreferrer" style="color: var(--primary); text-decoration: none;">' + escapeHtml(result.title || 'Untitled') + '</a></h3>' +
+                        '<p style="color: var(--text-light); font-size: 14px; margin-bottom: 8px;">' + escapeHtml(snippet) + '</p>' +
+                        (link !== '#' ? '<small style="color: var(--primary);">🔗 ' + escapeHtml(link) + '</small>' : '') +
+                        '</div>';
+                });
+                // Cache the results
+                searchCache[query] = html;
+            } else if (typeof res.results === 'string' || typeof res.response === 'string') {
+                html = '<div class="rich">' + formatRichText(res.results || res.response) + '</div>';
+                searchCache[query] = html;
+            } else {
+                html = box + 'No results found. Try a different search query.</div>';
+            }
+
+            displaySearchResults(html, query, false);
+            if (!res.error) addNotification('✅ Search Complete', 'Found results for "' + query + '"');
+        });
+    }
+
+    function displaySearchResults(html, query, fromCache) {
+        const resultsHtml = html + searchLinksHtml(query);
+        $('searchResultsList').innerHTML = resultsHtml;
+        
+        // Show cache indicator
+        if (fromCache) {
+            $('cacheIndicator').style.display = 'block';
+        } else {
+            $('cacheIndicator').style.display = 'none';
+        }
+        
+        $('searchResult').classList.remove('hidden');
+        $('searchResult').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // ============================================================
+    //  LEADERBOARD
+    // ============================================================
+    function leaderboardMessage(text, color) {
+        $('leaderboardBody').innerHTML = '<tr><td colspan="4" style="padding: 30px; text-align: center; color: ' + color + ';">' + text + '</td></tr>';
+    }
+
+    async function loadLeaderboard() {
+        const tbody = $('leaderboardBody');
+        leaderboardMessage('⏳ Loading leaderboard...', 'var(--text-light)');
+
+        // The endpoint may be GET or POST on the server, so try GET first and fall back
+        let res = await apiCall('/api/leaderboard', null, 'GET');
+        if (res.error && [404, 405, 422].includes(res.status)) {
+            res = await apiCall('/api/leaderboard', {}, 'POST');
+        }
+
+        if (res.error) {
+            leaderboardMessage('⚠️ Could not load the leaderboard: ' + escapeHtml(res.error), 'var(--danger)');
+            return;
+        }
+
+        const list = Array.isArray(res) ? res : (res.leaderboard || res.users || res.data || []);
+        if (!Array.isArray(list) || list.length === 0) {
+            leaderboardMessage('📊 No users on leaderboard yet. Start learning to appear here!', 'var(--text-light)');
+            return;
+        }
+
+        const medals = ['🥇', '🥈', '🥉'];
+        tbody.innerHTML = '';
+        list.slice(0, 10).forEach((user, i) => {
+            const isMe = currentUser && ((user.email && user.email === currentUser.email) || user.username === currentUser.username);
+            const tr = document.createElement('tr');
+            if (isMe) tr.style.background = 'rgba(102, 126, 234, 0.12)';
+            tr.innerHTML =
+                '<td style="padding: 15px; border-bottom: 1px solid var(--border); text-align: center;"><span style="font-size: 20px; font-weight: 700;">' + (medals[i] || (i + 1)) + '</span></td>' +
+                '<td style="padding: 15px; border-bottom: 1px solid var(--border); font-weight: 600;">' + escapeHtml(user.username || 'Anonymous') + (isMe ? ' <small style="color: var(--primary);">(you)</small>' : '') + '</td>' +
+                '<td style="padding: 15px; border-bottom: 1px solid var(--border); color: var(--primary); font-weight: 600;">' + escapeHtml(user.total_score || 0) + ' <small>pts</small></td>' +
+                '<td style="padding: 15px; border-bottom: 1px solid var(--border); color: var(--success); font-weight: 600;">🔥 ' + escapeHtml(user.streak || 0) + '</td>';
+            tbody.appendChild(tr);
+        });
+    }
+
+    // ============================================================
+    //  PROFILE
+    // ============================================================
+    function saveProfile() {
+        const newUsername = $('profileUsername').value.trim();
+        if (!newUsername) {
+            showError('Username cannot be empty');
+            return;
+        }
+
+        currentUser.username = newUsername;
+        saveSession();   // keeps the new name after a reload
+        $('navUser').textContent = newUsername;
+        $('dashName').textContent = newUsername;
+        showToast('Profile saved', 'success');
+        addNotification('✅ Profile Saved', 'Username updated to "' + newUsername + '"!');
+    }
+
+    // ============================================================
+    //  MENUS
+    // ============================================================
+    function toggleMobileMenu() {
+        $('mobileMenu').classList.toggle('active');
+    }
+
+    document.addEventListener('click', function (event) {
+        const mobileMenu = $('mobileMenu');
+        const menuToggle = document.querySelector('.menu-toggle');
+        if (mobileMenu && menuToggle && !mobileMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+            mobileMenu.classList.remove('active');
+        }
+        if (!event.target.closest('.notification-btn') && !event.target.closest('#notificationDropdown')) {
+            $('notificationDropdown').classList.remove('active');
+        }
+    });
+
+    // Logging out in one tab logs out the others too
+    window.addEventListener('storage', function (e) {
+        if (e.key === SESSION_KEY && !e.newValue && currentUser) logout();
+    });
+
+    // ============================================================
+    //  START UP
+    // ============================================================
+    (function init() {
+        if (darkMode) document.body.classList.add('dark-mode');
+        $('landingThemeIcon').textContent = darkMode ? '☀️' : '🌙';
+        $('appThemeIcon').textContent = darkMode ? '☀️' : '🌙';
+
+        populateYears();
+        onExamChange();
+        initTextbookSubjects();
+
+        onEnter('loginEmail', () => handleLogin($('loginBtn')));
+        onEnter('loginPass', () => handleLogin($('loginBtn')));
+        onEnter('signupName', () => handleSignup($('signupBtn')));
+        onEnter('signupEmail', () => handleSignup($('signupBtn')));
+        onEnter('signupPass', () => handleSignup($('signupBtn')));
+        onEnter('topicInput', () => generateTextbook($('genTextbookBtn')));
+        onEnter('chatInput', sendChat);
+        onEnter('pqTopic', () => generatePastQuestions($('pqBtn')));
+        onEnter('searchQuery', () => performWebSearch($('searchBtn')));
+
+        wakeServer();
+
+        // Logged in before? Go straight back into the app.
+        if (restoreSession()) {
+            enterApp();
+            switchPage(storeGet(PAGE_KEY) || 'dashboard');
+        }
+        document.documentElement.classList.remove('has-session');
+    })();
+</script>
+</body>
+</html>
